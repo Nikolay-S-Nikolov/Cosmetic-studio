@@ -1,0 +1,2 @@
+# Cosmetic-studio
+Django project
