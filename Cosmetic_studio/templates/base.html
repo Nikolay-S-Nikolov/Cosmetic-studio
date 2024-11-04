@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title_content %}Rusina Tahova{% endblock %}</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+    <!-- Swiper CSS -->
+    {#        <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">#}
+    {#    TODO: Fix this or remove it#}
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block style_link %}
+    {% endblock %}
+</head>
+<body>
+<div class="outer-container">
+    <header class="site-header">
+        <div class="top-header-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 flex align-items-center">
+                        <div class="header-bar-text d-none d-lg-block">
+                            <p>Discover Your Glow with Rusina Tahova</p>
+                        </div><!-- .header-bar-text -->
+
+                        <div class="header-bar-email d-none d-lg-block">
+                            <a href="tel:+359887567890">+359 887 56 78 90</a>
+                        </div><!-- .header-bar-email -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
+                        <div class="header-bar-social d-none d-md-block">
+                            <ul class="flex align-items-center">
+                                <li><a href="https://www.instagram.com/tahova.rusina/"><i
+                                        class="fa fa-instagram"></i></a></li>
+                                <li>
+                                    <a href="https://www.facebook.com/photo/?fbid=1990274644695908&set=pob.100003493474195&locale=bg_BG"><i
+                                            class="fa fa-facebook"></i></a></li>
+                            </ul>
+                        </div><!-- .header-bar-social -->
+
+                        <div class="header-bar-search d-none d-md-block">
+                            <form>
+                                <input type="search" placeholder="Search">
+                            </form>
+                        </div><!-- .header-bar-search -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container-fluid -->
+        </div><!-- .top-header-bar -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="site-branding flex flex-column align-items-center">
+                        <h1 class="site-title"><a href="{% url 'index' %}" rel="home">Rusina Tahova</a></h1>
+                        <p class="site-description">Licensed Aesthetician</p>
+                    </div><!-- .site-branding -->
+
+                    <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- .hamburger-menu -->
+                        <ul class="flex-lg flex-lg-row justify-content-lg-center align-content-lg-center">
+                            <li class="current-menu-item"><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Service</a></li>
+                            <li><a href="../blog.html">blog</a></li>
+                            <li><a href="../about.html">about me</a></li>
+                            <li><a href="../contact.html">Contact</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'signup' %}">Register</a></li>
+                            <li><a href="{% url 'signout' %}">SignOut</a></li>
+                            <li><a href="{% url 'profile_details' %}">Profile</a></li>
+                        </ul>
+                        <div class="header-bar-social d-md-none">
+                            <ul class="flex justify-content-center align-items-center">
+                                <li><a href="https://www.instagram.com/tahova.rusina/"><i
+                                        class="fa fa-instagram"></i></a></li>
+                                <li>
+                                    <a href="https://www.facebook.com/photo/?fbid=1990274644695908&set=pob.100003493474195&locale=bg_BG"><i
+                                            class="fa fa-facebook"></i></a></li>
+                            </ul>
+                        </div><!-- .header-bar-social -->
+
+                        <div class="header-bar-search d-md-none">
+                            <form>
+                                <input type="search" placeholder="Search">
+                            </form>
+                        </div><!-- .header-bar-search -->
+                    </nav><!-- .site-navigation -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </header><!-- .site-header -->
+</div><!-- .outer-container -->
+{% block big_image %}
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="swiper-container hero-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="hero-content flex justify-content-center align-items-center flex-column">
+                                <img src="{% static 'images/index.jpg' %}" alt="">
+                            </div><!-- .hero-content -->
+                        </div><!-- .swiper-slide -->
+                    </div><!-- .swiper-wrapper -->
+                </div><!-- .swiper-container -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .hero-section -->
+{% endblock %}
+{% block main_content %}
+
+{% endblock %}
+
+
+<footer class="sit-footer">
+    {% block outer_footer %}
+
+        <div class="outer-container">
+            <div class="container-fluid">
+                <div class="row footer-recent-posts">
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="footer-post-wrap flex justify-content-between">
+                            <figure>
+                                <a href="#"><img src="{% static 'images/foot-1.jpg' %}" alt=""></a>
+                            </figure>
+
+                            <div class="footer-post-cont flex flex-column justify-content-between">
+                                <header class="entry-header">
+                                    <div class="posted-date">
+                                        January 30, 2018
+                                    </div><!-- .entry-header -->
+
+                                    <h3><a href="#">My fall in love story</a></h3>
+
+                                    <div class="tags-links">
+                                        <a href="#">#winter</a>
+                                        <a href="#">#love</a>
+                                        <a href="#">#snow</a>
+                                        <a href="#">#january</a>
+                                    </div><!-- .tags-links -->
+                                </header><!-- .entry-header -->
+
+                                <footer class="entry-footer">
+                                    <a class="read-more" href="#">read more</a>
+                                </footer><!-- .entry-footer -->
+                            </div><!-- .footer-post-cont -->
+                        </div><!-- .footer-post-wrap -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="footer-post-wrap flex justify-content-between">
+                            <figure>
+                                <a href="#"><img src="{% static 'images/foot-2.jpg' %}" alt=""></a>
+                            </figure>
+
+                            <div class="footer-post-cont flex flex-column justify-content-between">
+                                <header class="entry-header">
+                                    <div class="posted-date">
+                                        January 30, 2018
+                                    </div><!-- .entry-header -->
+
+                                    <h3><a href="#">Man’s best friend</a></h3>
+
+                                    <div class="tags-links">
+                                        <a href="#">#winter</a>
+                                        <a href="#">#love</a>
+                                        <a href="#">#snow</a>
+                                        <a href="#">#january</a>
+                                    </div><!-- .tags-links -->
+                                </header><!-- .entry-header -->
+
+                                <footer class="entry-footer">
+                                    <a class="read-more" href="#">read more</a>
+                                </footer><!-- .entry-footer -->
+                            </div><!-- .footer-post-cont -->
+                        </div><!-- .footer-post-wrap -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="footer-post-wrap flex justify-content-between">
+                            <figure>
+                                <a href="#"><img src="{% static 'images/foot-3.jpg' %}" alt=""></a>
+                            </figure>
+
+                            <div class="footer-post-cont flex flex-column justify-content-between">
+                                <header class="entry-header">
+                                    <div class="posted-date">
+                                        January 30, 2018
+                                    </div><!-- .entry-header -->
+
+                                    <h3><a href="#">Writing on a budget</a></h3>
+
+                                    <div class="tags-links">
+                                        <a href="#">#winter</a>
+                                        <a href="#">#love</a>
+                                        <a href="#">#snow</a>
+                                        <a href="#">#january</a>
+                                    </div><!-- .tags-links -->
+                                </header><!-- .entry-header -->
+
+                                <footer class="entry-footer">
+                                    <a class="read-more" href="#">read more</a>
+                                </footer><!-- .entry-footer -->
+                            </div><!-- .footer-post-cont -->
+                        </div><!-- .footer-post-wrap -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="footer-post-wrap flex justify-content-between">
+                            <figure>
+                                <a href="#"><img src="{% static 'images/foot-4.jpg' %}" alt=""></a>
+                            </figure>
+
+                            <div class="footer-post-cont flex flex-column justify-content-between">
+                                <header class="entry-header">
+                                    <div class="posted-date">
+                                        January 30, 2018
+                                    </div><!-- .entry-header -->
+
+                                    <h3><a href="#">My fall in love story</a></h3>
+
+                                    <div class="tags-links">
+                                        <a href="#">#winter</a>
+                                        <a href="#">#love</a>
+                                        <a href="#">#snow</a>
+                                        <a href="#">#january</a>
+                                    </div><!-- .tags-links -->
+                                </header><!-- .entry-header -->
+
+                                <footer class="entry-footer">
+                                    <a class="read-more" href="#">read more</a>
+                                </footer><!-- .entry-footer -->
+                            </div><!-- .footer-post-cont -->
+                        </div><!-- .footer-post-wrap -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container-fluid -->
+        </div><!-- .outer-container -->
+    {% endblock %}
+
+    {% block footer %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="footer-instagram flex flex-wrap flex-lg-nowrap">
+                    <figure>
+                        <a href="#"><img src="{% static 'images/a.jpg' %}" alt=""></a>
+                    </figure>
+
+                    <figure>
+                        <a href="#"><img src="{% static 'images/b.jpg' %}" alt=""></a>
+                    </figure>
+
+                    <figure>
+                        <a href="#"><img src="{% static 'images/c.jpg' %}" alt=""></a>
+                    </figure>
+
+                    <figure>
+                        <a href="#"><img src="{% static 'images/d.jpg' %}" alt=""></a>
+                    </figure>
+
+                    <figure>
+                        <a href="#"><img src="{% static 'images/e.jpg' %}" alt=""></a>
+                    </figure>
+
+                    <figure>
+                        <a href="#"><img src="{% static 'images/f.jpg' %}" alt=""></a>
+                    </figure>
+
+                    <figure>
+                        <a href="#"><img src="{% static 'images/g.jpg' %}" alt=""></a>
+                    </figure>
+                </div>
+            </div><!-- .row -->
+        </div><!-- .container -->
+    {% endblock %}
+
+
+    <div class="footer-bar">
+        <div class="outer-container">
+            <div class="container-fluid">
+                <div class="row justify-content-between">
+                    <div class="col-12 col-md-6">
+                        <div class="footer-copyright">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by
+                                <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed
+                                by:
+                                <a href="https://themewagon.com/" target="_blank">ThemeWagon</a> | Customized by
+                                Nikolay
+                                Nikolov
+                            </p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </div><!-- .footer-copyright -->
+                    </div><!-- .col-xl-4 -->
+
+                    <div class="col-12 col-md-6">
+                        <div class="footer-social">
+                            <ul class="flex justify-content-center justify-content-md-end align-items-center">
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div><!-- .footer-social -->
+                    </div><!-- .col-xl-4 -->
+                </div><!-- .row -->
+            </div><!-- .container-fluid -->
+        </div><!-- .outer-container -->
+    </div><!-- .footer-bar -->
+</footer><!-- .sit-footer -->
+
+<script type='text/javascript' src='{% static 'js/jquery.js' %}'></script>
+<script type='text/javascript' src='{% static 'js/bootstrap.min.js' %}'></script>
+{#<script type='text/javascript' src='{% static 'js/swiper.min.js' %}'></script>#}
+{#    TODO: Fix this or remove it#}
+
+<script type='text/javascript' src='{% static 'js/custom.js' %}'></script>
+{% block extra_js %}
+
+{% endblock %}
+
+
+</body>
+</html>
