@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load custom_filter %}
 {% load static %}
 {% block style_link %}
-
+        
     <link rel="shortcut icon" href="../../staticfiles/images/favicon.png">
 
     <!-- Bootstrap CSS -->
@@ -17,27 +18,32 @@
 
     <div class="site-wrap d-md-flex align-items-stretch">
         <div class="bg-img"
-             style="background-image: url('https://instagram.fsof11-1.fna.fbcdn.net/v/t39.30808-6/438697419_18313664602182271_1934449145384938970_n.jpg?stp=dst-jpg_e15_s640x640&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi44OTl4ODk5LnNkci5mMzA4MDguZGVmYXVsdF9pbWFnZSJ9&_nc_ht=instagram.fsof11-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=g_vd1QvLy8YQ7kNvgHpKuAX&_nc_gid=92911bcc78b843e6b2cfb360bccb4772&edm=ANTKIIoAAAAA&ccb=7-5&oh=00_AYCs9XoFh4iSnfIRsuLTPAu9_QYVs4oHV-qMt-qy7RhJtg&oe=672EBFFE&_nc_sid=d885a2')"></div>
+             style="background-image: url('{% static 'images/main.jpg' %}')"></div>
         <div class="form-wrap">
             <div class="form-inner">
                 <h1 class="title">Sign up</h1>
                 <p class="caption mb-4">Create your account in seconds.</p>
 
-                <form action="#" class="pt-3">
+                <form action="{% url 'register_user' %}" class="pt-3" method="post">
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="name" placeholder="Full Name">
-                        <label for="name">Full Name</label>
+                        {{ form.user_name}}
+                        <label for="name">Full Name or Nickname</label>
                     </div>
 
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="email" placeholder="info@example.com">
-                        <label for="email">Email Address</label>
+                        {{ form.email }}
+                        <label for="id_email">Email Address</label>
                     </div>
 
                     <div class="form-floating">
                         <span class="password-show-toggle js-password-show-toggle"><span class="uil"></span></span>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        {{ form.password1 }}
+                        <label for="id_password1">Password</label>
+                    </div>
+                    <div class="form-floating">
+                        <span class="password-show-toggle js-password-show-toggle"><span class="uil"></span></span>
+                        {{ form.password2 }}
                         <label for="password">Password</label>
                     </div>
 
@@ -54,6 +60,7 @@
                     </div>
 
                     <div class="mb-2">Already a member? <a href="{% url 'login' %}">Log in</a></div>
+                    {% csrf_token %}
 
                 </form>
             </div>

@@ -1,20 +1,22 @@
 (function() {
-
     'use strict';
 
-    var elToggle = document.querySelector('.js-password-show-toggle'),
-        passwordInput = document.getElementById('password');
+    var toggles = document.querySelectorAll('.js-password-show-toggle');
 
-        elToggle.addEventListener('click', (e) => {
+    toggles.forEach(function(toggle) {
+        var passwordInput = toggle.parentElement.querySelector('input[type="password"], input[type="text"]');
+
+        toggle.addEventListener('click', function(e) {
             e.preventDefault();
 
-            if ( elToggle.classList.contains('active') ) {
+            if (toggle.classList.contains('active')) {
                 passwordInput.setAttribute('type', 'password');
-                elToggle.classList.remove('active');
+                toggle.classList.remove('active');
             } else {
                 passwordInput.setAttribute('type', 'text');
-                elToggle.classList.add('active');
+                toggle.classList.add('active');
             }
-        })
+        });
+    });
+})();
 
-})()

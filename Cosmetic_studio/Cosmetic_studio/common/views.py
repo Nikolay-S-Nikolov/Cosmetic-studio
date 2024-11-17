@@ -11,7 +11,7 @@ def login(request):
 
 
 def signup(request):
-    return render(request, 'user/signup.html')
+    return render(request, 'user/../../templates/accounts/register.html')
 
 
 def signout(request):
