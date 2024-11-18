@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-lg-6 flex align-items-center">
                         <div class="header-bar-text d-none d-lg-block">
-                            <p>Discover Your Glow with Rusina Tahova</p>
+                            <p>Discover Your Glow with Rusina Tahova loged in as {{ request.user.email }}</p>
                         </div><!-- .header-bar-text -->
 
                         <div class="header-bar-email d-none d-lg-block">
@@ -86,7 +86,7 @@
                             <li><a href="../blog.html">blog</a></li>
                             <li><a href="../about.html">about me</a></li>
                             <li><a href="../contact.html">Contact</a></li>
-                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'login_user' %}">Login</a></li>
                             <li><a href="{% url 'register_user' %}">Register</a></li>
                             <li><a href="{% url 'signout' %}">SignOut</a></li>
                             <li><a href="{% url 'profile_details' %}">Profile</a></li>

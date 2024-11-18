@@ -1,8 +1,8 @@
 from django.urls import path
 
-from Cosmetic_studio.accounts.views import RegisterUserView
-from Cosmetic_studio.common.views import index, login, signup, signout, profile_details, edit_profile, delete_profile
+from Cosmetic_studio.accounts.views import RegisterUserView, LoginUserView
 
 urlpatterns = (
     path('register/', RegisterUserView.as_view(), name='register_user'),
+    path('login/', LoginUserView.as_view(), name='login_user'),
 )

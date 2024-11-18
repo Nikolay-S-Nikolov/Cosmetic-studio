@@ -1,8 +1,10 @@
+from django.contrib.auth import views as auth_views
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from Cosmetic_studio.accounts.forms import CreateUserForm
+from Cosmetic_studio.accounts.forms import CreateUserForm, StudioUserLoginForm
+from Cosmetic_studio.utils.user_mixins import RedirectAuthenticatedMixin
 
 
 # TODO cerate mixins for:
@@ -11,11 +13,12 @@ from Cosmetic_studio.accounts.forms import CreateUserForm
 # PageRestrictionMixin - only for is_staff and is_superuser extends LoginRequiredMixin
 # RestrictedStaffUsers - only for superusers extends LoginRequiredMixin
 
-class RegisterUserView(views.CreateView):
+class RegisterUserView(RedirectAuthenticatedMixin, views.CreateView):
     template_name = "accounts/register.html"
     form_class = CreateUserForm
-    success_url = reverse_lazy("index")  # TODO to redirect to profile update page after successful registration
+    success_url = reverse_lazy("index")  # TODO to redirect to profile details page after successful registration
 
 
-def create_user(request):
-    pass
+class LoginUserView(auth_views.LoginView):
+    form_class = StudioUserLoginForm
+    template_name = "accounts/login.html"

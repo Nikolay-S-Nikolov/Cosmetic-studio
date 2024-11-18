@@ -32,7 +32,10 @@ class StudioUserChangeForm(auth_forms.UserChangeForm):
 
 
 class StudioUserLoginForm(auth_forms.AuthenticationForm):
-    username = forms.EmailField(widget=forms.EmailInput(attrs={"autofocus": True}))
+    username = forms.EmailField(
+        widget=forms.EmailInput(attrs={"id": "email", "type": "email", "class": "form-control"}))
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "form-control", "type": "password", "id": "password", }))
 
 
 class ProfileEditForm(forms.ModelForm):

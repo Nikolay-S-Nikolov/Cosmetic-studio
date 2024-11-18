@@ -6,14 +6,6 @@ def index(request):
     return render(request, 'common/index.html')
 
 
-def login(request):
-    return render(request, 'user/login.html')
-
-
-def signup(request):
-    return render(request, 'user/../../templates/accounts/register.html')
-
-
 def signout(request):
     # logout(request)
     return render(request, 'user/signout.html')
