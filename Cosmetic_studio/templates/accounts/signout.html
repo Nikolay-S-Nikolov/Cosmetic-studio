@@ -19,7 +19,7 @@
         <div class="form-wrap">
             <div class="form-inner">
                 <h1 class="title">Sign Out</h1>  
-                <form class="pt-3" action="{% url 'signout' %}" method="post">
+                <form class="pt-3" action="{% url 'logout_user' %}" method="post">
                     {% csrf_token %}                
                     <div class="d-grid mb-4">
                         <button type="submit" class="btn btn-primary">Sign Out</button>

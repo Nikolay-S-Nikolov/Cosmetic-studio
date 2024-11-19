@@ -6,14 +6,6 @@ def index(request):
     return render(request, 'common/index.html')
 
 
-def signout(request):
-    # logout(request)
-    return render(request, 'user/signout.html')
-
-
-def profile_details(request):
-    return render(request, 'user/profile_details.html')
-
 
 def edit_profile(request):
     return render(request, 'user/edit_profile.html')

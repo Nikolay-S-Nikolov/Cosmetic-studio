@@ -88,7 +88,7 @@
                             <li><a href="../contact.html">Contact</a></li>
                             <li><a href="{% url 'login_user' %}">Login</a></li>
                             <li><a href="{% url 'register_user' %}">Register</a></li>
-                            <li><a href="{% url 'signout' %}">SignOut</a></li>
+                            <li><a href="{% url 'logout-page' %}">SignOut</a></li>
                             <li><a href="{% url 'profile_details' %}">Profile</a></li>
                         </ul>
                         <div class="header-bar-social d-md-none">
@@ -114,7 +114,13 @@
 </div><!-- .outer-container -->
 {% block big_image %}
 
-
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
