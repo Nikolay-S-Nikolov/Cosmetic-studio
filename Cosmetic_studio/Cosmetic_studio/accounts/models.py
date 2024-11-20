@@ -83,6 +83,7 @@ class Profile(models.Model):
             "Please enter preferred name/nickname for personalized communication"
         ),
         default="Anonymous",
+        blank=True,
     )
 
     phone_number = models.CharField(

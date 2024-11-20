@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load show_field_error %}
 {% load custom_filter %}
 {% load static %}
 {% block style_link %}
-        
+
     <link rel="shortcut icon" href="../../staticfiles/images/favicon.png">
 
     <!-- Bootstrap CSS -->
@@ -25,25 +26,26 @@
                 <p class="caption mb-4">Create your account in seconds.</p>
 
                 <form action="{% url 'register_user' %}" class="pt-3" method="post">
-
                     <div class="form-floating">
-                        {{ form.user_name}}
+                        {{ form.user_name }}
+                        {% render_field_errors form.user_name %}
                         <label for="name">Full Name or Nickname</label>
                     </div>
-
                     <div class="form-floating">
                         {{ form.email }}
+                        {% render_field_errors form.email %}                        
                         <label for="id_email">Email Address</label>
                     </div>
-
                     <div class="form-floating">
                         <span class="password-show-toggle js-password-show-toggle"><span class="uil"></span></span>
                         {{ form.password1 }}
+                        {% render_field_errors form.password1 %}
                         <label for="id_password1">Password</label>
                     </div>
                     <div class="form-floating">
                         <span class="password-show-toggle js-password-show-toggle"><span class="uil"></span></span>
                         {{ form.password2 }}
+                        {% render_field_errors form.password2 %}
                         <label for="password">Password</label>
                     </div>
 

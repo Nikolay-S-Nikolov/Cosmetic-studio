@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load show_field_error %}
 {% load static %}
 {% block style_link %}
 
@@ -21,14 +22,17 @@
                     {% csrf_token %}
                     <div class="form-floating mb-3">
                         {{ form.preferred_name_nickname }}
+                        {% render_field_errors form.preferred_name_nickname %}                        
                         <label for="id_form.preferred_name_nickname">Preferred name/nickname</label>
                     </div>
                     <div class="form-floating mb-3">
                         {{ form.phone_number }}
+                        {% render_field_errors form.phone_number %}
                         <label for="id_phone_number">Phone Number</label>
                     </div>
                     <div class="form-floating mb-3">
                         {{ form.profile_picture }}
+                        {% render_field_errors form.profile_picture %}                        
                         <label for="last_name">Profile picture</label>
                     </div>
                     <div class="d-grid mb-4">
