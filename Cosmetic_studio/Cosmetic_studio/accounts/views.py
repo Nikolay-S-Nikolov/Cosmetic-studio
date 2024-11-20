@@ -1,12 +1,10 @@
-from django.contrib.auth import views as auth_views, get_user_model
-from django.contrib.auth import mixins as auth_mixins
-from django.shortcuts import render
+from django.contrib.auth import views as auth_views, get_user_model, login
 from django.urls import reverse_lazy
 from django.views import generic as views
-
-from Cosmetic_studio.accounts.forms import CreateUserForm, StudioUserLoginForm
+from Cosmetic_studio.accounts.forms import CreateUserForm, StudioUserLoginForm, UpdateProfileForm
 from Cosmetic_studio.accounts.models import Profile
-from Cosmetic_studio.utils.user_mixins import RedirectUserMixin
+from Cosmetic_studio.utils.user_mixins import RedirectUserMixin, GetProfileMixin
+from django.contrib.messages import views as message_views
 
 UserModel = get_user_model()
 
@@ -23,6 +21,11 @@ class RegisterUserView(RedirectUserMixin, views.CreateView):
     template_name = "accounts/register.html"
     form_class = CreateUserForm
     success_url = reverse_lazy("index")  # TODO to redirect to profile details page after successful registration
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        return response
 
 
 class LoginUserView(RedirectUserMixin, auth_views.LoginView):
@@ -42,14 +45,29 @@ class LogoutUserView(auth_views.LogoutView):
     pass
 
 
-class ProfileDetailsView(RedirectUserMixin, views.DetailView):
+class ProfileDetailsView(RedirectUserMixin, GetProfileMixin, views.DetailView):
     redirect_unauthenticated_users = True
     redirect_message = "Please Login first to continue"
     model = UserModel
     template_name = "accounts/profile_details.html"
 
+
+class ProfileUpdateView(RedirectUserMixin, GetProfileMixin, message_views.SuccessMessageMixin,
+                        views.UpdateView):
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "accounts/edit_profile.html"
+    success_url = reverse_lazy("profile_details")
+    redirect_unauthenticated_users = True
+    redirect_message = "Please Login first to continue"
+    success_message = "Profile updated successfully."
+
+
+class UserDeleteView(RedirectUserMixin, message_views.SuccessMessageMixin, views.DeleteView):
+    model = UserModel
+    template_name = "accounts/delete_profile.html"
+    success_url = reverse_lazy("index")
+    success_message = "Profile deleted successfully."
+
     def get_object(self, queryset=None):
-        return self.request.user.profile
-
-
-
+        return self.request.user

@@ -68,7 +68,6 @@ class StudioUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 
 class Profile(models.Model):
-
     MAX_PHONE_LENGTH = 10
     MAX_PREFERRED_NAME_NICKNAME_LENGTH = 150
 
@@ -82,7 +81,8 @@ class Profile(models.Model):
         max_length=MAX_PREFERRED_NAME_NICKNAME_LENGTH,
         help_text=_(
             "Please enter preferred name/nickname for personalized communication"
-        )
+        ),
+        default="Anonymous",
     )
 
     phone_number = models.CharField(

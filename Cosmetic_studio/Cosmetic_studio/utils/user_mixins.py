@@ -2,6 +2,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
+from Cosmetic_studio.accounts.models import Profile
+
 
 class RedirectUserMixin:
     redirect_authenticated_users = False  # Set to True to redirect authenticated users to the index page
@@ -22,3 +24,9 @@ class RedirectUserMixin:
             return reverse_lazy('login_user')
         # Override this to implement logic for redirecting users based on their roles
         return reverse_lazy('index')
+
+
+class GetProfileMixin:
+    def get_object(self, queryset=None):
+        pk = self.request.user.pk
+        return Profile.objects.get(user_id=pk)

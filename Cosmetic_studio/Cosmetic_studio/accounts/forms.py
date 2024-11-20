@@ -38,7 +38,7 @@ class StudioUserLoginForm(auth_forms.AuthenticationForm):
         widget=forms.PasswordInput(attrs={"class": "form-control", "type": "password", "id": "password", }))
 
 
-class ProfileEditForm(forms.ModelForm):
+class ProfileBaseForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['preferred_name_nickname', 'phone_number', 'profile_picture']
@@ -47,3 +47,14 @@ class ProfileEditForm(forms.ModelForm):
             'phone_number': 'Phone Number',
             'profile_picture': 'Profile Picture',
         }
+
+
+class ProfileEditForm(ProfileBaseForm):
+    pass
+
+
+class UpdateProfileForm(ProfileBaseForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

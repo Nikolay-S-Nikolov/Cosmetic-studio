@@ -19,6 +19,15 @@
         <div class="form-wrap">
             <div class="form-inner">
                 <h1 class="title text-center mb-4">Profile Details</h1>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} " role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div class="profile-info mb-4">
                     <table class="table table-bordered">
                         <tbody>
