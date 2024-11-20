@@ -1,7 +1,7 @@
 from django.urls import path
 
 from Cosmetic_studio.accounts.views import RegisterUserView, LoginUserView, LogoutPageView, LogoutUserView, \
-    ProfileDetailsView, ProfileUpdateView, UserDeleteView
+    ProfileDetailsView, ProfileUpdateView, UserDeleteView,UserChangePasswordView
 
 urlpatterns = (
     path('register/', RegisterUserView.as_view(), name='register_user'),
@@ -11,5 +11,6 @@ urlpatterns = (
     path('details/', ProfileDetailsView.as_view(), name='profile_details'),
     path('edit-profile/', ProfileUpdateView.as_view(), name='edit_profile'),
     path('delete-profile/', UserDeleteView.as_view(), name='delete_profile'),
+    path('change-password/', UserChangePasswordView.as_view(), name='change_password'),
 
 )

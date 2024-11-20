@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views, get_user_model, login
 from django.urls import reverse_lazy
 from django.views import generic as views
-from Cosmetic_studio.accounts.forms import CreateUserForm, StudioUserLoginForm, UpdateProfileForm
+from Cosmetic_studio.accounts.forms import CreateUserForm, StudioUserLoginForm, UpdateProfileForm, ChangePassword
 from Cosmetic_studio.accounts.models import Profile
 from Cosmetic_studio.utils.user_mixins import RedirectUserMixin, GetProfileMixin
 from django.contrib.messages import views as message_views
@@ -20,7 +20,7 @@ class RegisterUserView(RedirectUserMixin, views.CreateView):
     redirect_message = "You are already logged in. Please log out first."
     template_name = "accounts/register.html"
     form_class = CreateUserForm
-    success_url = reverse_lazy("index")  # TODO to redirect to profile details page after successful registration
+    success_url = reverse_lazy("profile_details")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -67,7 +67,18 @@ class UserDeleteView(RedirectUserMixin, message_views.SuccessMessageMixin, views
     model = UserModel
     template_name = "accounts/delete_profile.html"
     success_url = reverse_lazy("index")
+    redirect_unauthenticated_users = True
+    redirect_message = "Please Login first to continue"
     success_message = "Profile deleted successfully."
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class UserChangePasswordView(RedirectUserMixin, message_views.SuccessMessageMixin, auth_views.PasswordChangeView):
+    form_class = ChangePassword
+    template_name = "accounts/change_password.html"
+    success_url = reverse_lazy("profile_details")
+    success_message = "Password changed successfully."
+    redirect_unauthenticated_users = True
+    redirect_message = "Please Login first to continue"
