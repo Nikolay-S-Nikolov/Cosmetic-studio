@@ -98,9 +98,9 @@
                             <li class="current-menu-item"><a href="{% url 'index' %}">Home</a></li>
                             <li><a href="#">Portfolio</a></li>
                             <li><a href="#">Service</a></li>
-                            <li><a href="../blog.html">blog</a></li>
-                            <li><a href="../about.html">about me</a></li>
-                            <li><a href="../contact.html">Contact</a></li>
+                            <li><a href="{% url 'blog' %}">blog</a></li>
+                            <li><a href="{% url 'about' %}">about me</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
                             {% if request.user.is_authenticated %}
                                 <li><a href="{% url 'profile_details' %}">Profile</a></li>
                             {% endif %}
@@ -144,30 +144,30 @@
         </div><!-- .container -->
     </header><!-- .site-header -->
 </div><!-- .outer-container -->
-{% block big_image %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} " role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="swiper-container hero-slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="hero-content flex justify-content-center align-items-center flex-column">
-                                <img src="{% static 'images/index.jpg' %}" alt="">
-                            </div><!-- .hero-content -->
-                        </div><!-- .swiper-slide -->
-                    </div><!-- .swiper-wrapper -->
-                </div><!-- .swiper-container -->
-            </div><!-- .col -->
-        </div><!-- .row -->
-    </div><!-- .hero-section -->
-{% endblock %}
+{#{% block big_image %}#}
+{#    {% if messages %}#}
+{#        {% for message in messages %}#}
+{#            <div class="alert alert-{{ message.tags }} " role="alert">#}
+{#                {{ message }}#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+{#    <div class="container-fluid">#}
+{#        <div class="row">#}
+{#            <div class="col-12">#}
+{#                <div class="swiper-container hero-slider">#}
+{#                    <div class="swiper-wrapper">#}
+{#                        <div class="swiper-slide">#}
+{#                            <div class="hero-content flex justify-content-center align-items-center flex-column">#}
+{#                                <img src="{% static 'images/index.jpg' %}" alt="">#}
+{#                            </div><!-- .hero-content -->#}
+{#                        </div><!-- .swiper-slide -->#}
+{#                    </div><!-- .swiper-wrapper -->#}
+{#                </div><!-- .swiper-container -->#}
+{#            </div><!-- .col -->#}
+{#        </div><!-- .row -->#}
+{#    </div><!-- .hero-section -->#}
+{#{% endblock %}#}
 {% block main_content %}
 
 {% endblock %}

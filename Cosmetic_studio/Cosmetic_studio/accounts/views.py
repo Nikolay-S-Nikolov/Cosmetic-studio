@@ -9,12 +9,6 @@ from django.contrib.messages import views as message_views
 UserModel = get_user_model()
 
 
-# TODO cerate mixins for:
-# RestrictedUserAccessMixin - only for superusers or owners extends LoginRequiredMixin
-# LogoutRequiredMixin only for unauthenticated users
-# PageRestrictionMixin - only for is_staff and is_superuser extends LoginRequiredMixin
-# RestrictedStaffUsers - only for superusers extends LoginRequiredMixin
-
 class RegisterUserView(RedirectUserMixin, views.CreateView):
     redirect_authenticated_users = True
     redirect_message = "You are already logged in. Please log out first."

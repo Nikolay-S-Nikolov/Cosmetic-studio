@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+    <div class="form-container">
+        <form action="{% url 'delete_team_member' pk=object.pk %}" method="post">
+            <h1 class="title">Delete Team Member Card</h1>
+            {% if object.name %}
+                <h4 class="caption mb-4">"You are about to delete the card for {{ object.name }}. This action is
+                    irreversible. Are you sure you want to proceed?"</h4>
+            {% else %}
+                <h4 class="caption mb-4">"You are about to delete the card. This action is
+                    irreversible. Are you sure you want to proceed?"</h4>
+            {% endif %}
+            <button type="submit">Yes</button>
+            {% csrf_token %}
+        </form>
+    </div>
+
+{% endblock %}
