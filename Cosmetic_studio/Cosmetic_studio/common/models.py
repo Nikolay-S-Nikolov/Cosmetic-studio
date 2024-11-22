@@ -1,4 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+
+UserModel = get_user_model()
 
 
 class TeamMemberCard(models.Model):
@@ -63,6 +66,14 @@ class TeamMemberCard(models.Model):
         verbose_name='Ordering',
     )
 
+    created_by = models.ForeignKey(
+        UserModel,
+        verbose_name='Created By',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+
     class Meta:
         verbose_name = "Team Member Card"
         verbose_name_plural = "Team Member Cards"
@@ -102,4 +113,15 @@ class IndexPageAds(models.Model):
         verbose_name='Created At',
     )
 
+    class Meta:
+        verbose_name = "Index Page Advertisement"
+        verbose_name_plural = "Index Page Advertisements"
+        ordering = ['-created_at']
 
+    created_by = models.ForeignKey(
+        UserModel,
+        verbose_name='Created By',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
