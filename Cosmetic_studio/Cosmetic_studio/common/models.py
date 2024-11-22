@@ -18,6 +18,20 @@ class TeamMemberCard(models.Model):
         null=True,
     )
 
+    featured_image = models.ImageField(
+        upload_to='team_pictures/',
+        verbose_name='Featured Image',
+        blank=True,
+        null=True,
+    )
+
+    about_image=models.ImageField(
+        upload_to='team_pictures/',
+        verbose_name='About Image',
+        blank=True,
+        null=True,
+    )
+
     title = models.CharField(
         max_length=300,
         verbose_name='Card Title',
