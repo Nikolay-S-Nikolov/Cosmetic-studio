@@ -1,0 +1,97 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    /*background-color: #fdf8f3;*/
+    /*color: #5a5a5a;*/
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Container Styles */
+.service-details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.service-details-header h3 {
+    font-family: 'Georgia', serif;
+    color: #d8a48f;
+    text-transform: uppercase;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.service-images {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.service-images img {
+    max-width: 400px;
+    max-height: 400px ;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*!* Image Styles *!*/
+/*.service-images img {*/
+/*    max-width: 100%;*/
+/*    height: auto;*/
+/*    display: block;*/
+/*    margin: 10px auto;*/
+/*    border-radius: 8px;*/
+/*}*/
+
+/* Description Styles */
+.service-description {
+    margin: 40px 0;
+}
+
+.service-description h4 {
+    font-family: 'Georgia', serif;
+    color: #d8a48f;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.service-description p {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* Pricing Section */
+.service-pricing > div {
+    border-top: 1px solid #e8d7cf;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.service-pricing h4 {
+    font-family: 'Georgia', serif;
+    color: #d8a48f;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.service-pricing p {
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.service-pricing p:last-child {
+    font-weight: bold;
+    color: #c9947a;
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}

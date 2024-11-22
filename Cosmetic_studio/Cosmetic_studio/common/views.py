@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
 from Cosmetic_studio.common.models import TeamMemberCard, IndexPageAds
@@ -32,13 +32,14 @@ class TeamMemberCardUpdateView(views.UpdateView):
     model = TeamMemberCard
     fields = '__all__'
     template_name = 'common/update-team-member.html'
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse("details_team_member", kwargs={"pk": self.object.pk})
 
 
 class TeamMemberCardDeleteView(views.DeleteView):
     model = TeamMemberCard
     template_name = 'common/delete-team-member.html'
-    success_url = reverse_lazy('index')
 
 
 class AdvCardCreateView(views.CreateView):

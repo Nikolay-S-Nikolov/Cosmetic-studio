@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+    <div class="service-header">
+        <h2 class="name">SERVICES</h2>
+    </div>
+    {% if request.user.is_staff %}
+        <div class="service-links" aria-label="Team member actions">
+            <a href="{% url 'create_service' %}" class="action-link">create service</a>
+            <a href="{% url 'create_service_pricing' %}" class="action-link">create pricing</a>
+            <a href="{% url 'create_service_picture' %}" class="action-link">create pictures</a>
+        </div><!-- .tags-links -->
+    {% endif %}
+    <div id="service-row" class="service-row">
+        {% for service in object_list %}
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="{{ service.main_image.url }}" alt="{{ service.name }} picture">
+                </div>
+                <div class="service-details">
+                    <h3>{{ service.name }}</h3>
+                    <p>{{ service.subheading }}</p>
+                    <a href="{% url 'details_service' pk=service.pk %}" class="learn-more-btn">LEARN MORE</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+
 from Cosmetic_studio.utils.services_mixins import TimestampedUserMixin
 
 
@@ -26,10 +27,14 @@ class Services(TimestampedUserMixin):
 
 
 class ServicePricing(TimestampedUserMixin):
+    """
+    You can include BENEFITS as ServicePricing model without price
+    """
     service = models.ForeignKey(
         Services,
         on_delete=models.CASCADE,
         verbose_name='Pricing',
+        related_name='pricing',
     )
 
     service_type = models.CharField(
@@ -53,6 +58,7 @@ class ServicePictures(TimestampedUserMixin):
         Services,
         on_delete=models.CASCADE,
         verbose_name='Pictures',
+        related_name='pictures',
     )
 
     image = models.ImageField(
@@ -62,3 +68,7 @@ class ServicePictures(TimestampedUserMixin):
 
     def __str__(self):
         return f'Image {self.id} for {self.service}'
+
+#
+# my_services = Services.objects.filter(pk=2).first().service_pricing_set.all()[1]
+# pictures = my_services.servicepicture_set.all()
