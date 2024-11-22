@@ -110,10 +110,11 @@ a:hover, a:active {
 --------------------------------*/
 .header-bar-social {
     margin-right: 15px;
+    padding: 12px 20px;
 }
 
 .header-bar-social ul {
-    padding: 0;
+
     margin: 0;
     list-style: none;
 }

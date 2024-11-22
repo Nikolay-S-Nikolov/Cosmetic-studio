@@ -11,17 +11,23 @@
                         <header class="entry-header">
                             <h2 class="entry-title">{{ card.title }}</h2>
                             {% if request.user.is_staff %}
-                                <div class="tags-links">
-                                    <a href="{% url 'create_team_member' %}">create</a>
-                                    <a href="{% url 'update_team_member' pk=card.pk %}">update</a>
-                                    <a href="{% url 'delete_team_member' pk=card.pk %}">delete</a>
+                                <div class="tags-links" aria-label="Team member actions">
+                                    <a href="{% url 'create_team_member' %}" class="action-link">create</a>
+                                    <a href="{% url 'update_team_member' pk=card.pk %}" class="action-link">update</a>
+                                    <a href="{% url 'delete_team_member' pk=card.pk %}" class="action-link">delete</a>
                                 </div><!-- .tags-links -->
                             {% endif %}
                         </header><!-- .entry-header -->
 
-                        <figure class="featured-image">
-                            <img src="{{ card.picture.url }}" alt="">
-                        </figure><!-- .featured-image -->
+                        {% if card.picture %}
+                            <figure class="featured-image">
+                                <img src="{{ card.picture.url }}" alt="{{ card.name }}picture">
+                            </figure><!-- .featured-image -->
+                        {% else %}
+                            <figure class="featured-image">
+                                <img src="{% static 'images/default team member.jpg' %}" alt="Default Team Member Picture">
+                            </figure><!-- .featured-image -->
+                        {% endif %}
 
                         <div class="entry-content">
                             <p>{{ card.description }}</p>
@@ -30,6 +36,7 @@
                         <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
                             <ul class="post-share flex align-items-center order-3 order-lg-1">
                                 <label>Share</label>
+                                {# TODO create share article logic #}
                                 <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
@@ -37,7 +44,7 @@
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             </ul><!-- .post-share -->
 
-                            <a class="read-more order-2" href="#">Read more</a>
+                            <a class="read-more order-2" href="{% url 'details_team_member' pk=card.pk %}">Read more</a>
 
                             <div class="comments-count order-1 order-lg-3">
                                 <a href="#">2 Comments</a>
@@ -139,7 +146,7 @@
                                 <h3><a href="#">My fall in love story</a></h3>
 
                                 <div class="tags-links">
-                                    <a href="#">#winter</a>
+                                    <a href="#">1#winter</a>
                                     <a href="#">#love</a>
                                     <a href="#">#snow</a>
                                     <a href="#">#january</a>

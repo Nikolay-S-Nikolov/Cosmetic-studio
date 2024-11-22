@@ -46,13 +46,21 @@
                     <div class="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
                         <div class="header-bar-social d-none d-md-block">
                             <ul class="flex align-items-center">
+
+                                <li><a href="https://www.instagram.com/tahova.rusina/"><i
+                                        class="fa fa-instagram"></i></a></li>
+                                <li>
+                                    <a href="https://www.facebook.com/photo/?fbid=1990274644695908&set=pob.100003493474195&locale=bg_BG"><i
+                                            class="fa fa-facebook"></i></a></li>
                                 {% if request.user.profile.profile_picture %}
-                                    <li><a href="{% url 'profile_details' %}"><img src="{{ request.user.profile.profile_picture }}" alt="Profile Picture"
-                                             class="profile-pic" style="width: 30px; height: 30px; border-radius: 50%;"></a>
+                                    <li><a href="{% url 'profile_details' %}"><img
+                                            src="{{ request.user.profile.profile_picture }}" alt="Profile Picture"
+                                            class="profile-pic" style="width: 30px; height: 30px; border-radius: 50%;"></a>
                                     </li>
                                 {% else %}
-                                    <li><a href="{% url 'profile_details' %}"><img src="{% static 'images/default_pic.jpg' %}" alt="Default Picture"
-                                             class="profile-pic" style="width: 30px; height: 30px; border-radius: 50%;"></a>
+                                    <li><a href="{% url 'profile_details' %}"><img
+                                            src="{% static 'images/default_pic.jpg' %}" alt="Default Picture"
+                                            class="profile-pic" style="width: 30px; height: 30px; border-radius: 50%;"></a>
                                     </li>
                                 {% endif %}
                                 {% if request.user.is_authenticated %}
@@ -61,19 +69,8 @@
                                 {% else %}
                                     <li><a href="{% url 'login_user' %}">Login</a></li>
                                 {% endif %}
-                                <li><a href="https://www.instagram.com/tahova.rusina/"><i
-                                        class="fa fa-instagram"></i></a></li>
-                                <li>
-                                    <a href="https://www.facebook.com/photo/?fbid=1990274644695908&set=pob.100003493474195&locale=bg_BG"><i
-                                            class="fa fa-facebook"></i></a></li>
                             </ul>
                         </div><!-- .header-bar-social -->
-
-                        <div class="header-bar-search d-none d-md-block">
-                            <form>
-                                <input type="search" placeholder="Search1">
-                            </form>
-                        </div><!-- .header-bar-search -->
                     </div><!-- .col -->
                 </div><!-- .row -->
             </div><!-- .container-fluid -->
@@ -97,9 +94,9 @@
                         <ul class="flex-lg flex-lg-row justify-content-lg-center align-content-lg-center">
                             <li class="current-menu-item"><a href="{% url 'index' %}">Home</a></li>
                             <li><a href="#">Portfolio</a></li>
-                            <li><a href="#">Service</a></li>
+                            <li><a href="#">Services</a></li>
                             <li><a href="{% url 'blog' %}">blog</a></li>
-                            <li><a href="{% url 'about' %}">about me</a></li>
+                            <li><a href="{% url 'about_me' %}">about me</a></li>
                             <li><a href="{% url 'contact' %}">Contact</a></li>
                             {% if request.user.is_authenticated %}
                                 <li><a href="{% url 'profile_details' %}">Profile</a></li>
@@ -133,11 +130,6 @@
                             </ul>
 
                         </div><!-- .header-bar-social -->
-                        <div class="header-bar-search d-md-none">
-                            <form>
-                                <input type="search" placeholder="Search2">
-                            </form>
-                        </div><!-- .header-bar-search -->
                     </nav><!-- .site-navigation -->
                 </div><!-- .col -->
             </div><!-- .row -->

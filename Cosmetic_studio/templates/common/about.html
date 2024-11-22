@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+    <div class="container single-page about-page">
+        <div class="row">
+            <div class="col-12">
+                <div class="content-wrap">
+                    <header class="entry-header">
+                        {% if request.user.is_staff %}
+                            <div class="posted-date">
+                                {{ object.created_at|date:"F d, Y" }}
+                            </div><!-- .posted-date -->
+                        {% endif %}
+
+                        <h2 class="entry-title">{{ object.title }}</h2>
+
+                        {% if request.user.is_staff %}
+                            <div class="tags-links" aria-label="Team member actions">
+                                <a href="{% url 'create_team_member' %}" class="action-link">create</a>
+                                <a href="{% url 'update_team_member' pk=object.pk %}" class="action-link">update</a>
+                                <a href="{% url 'delete_team_member' pk=object.pk %}" class="action-link">delete</a>
+                            </div><!-- .tags-links -->
+                        {% endif %}
+                    </header><!-- .entry-header -->
+                
+                    {% if object.featured_image %}
+                        <figure class="featured-image">
+                            <img src="{{ object.featured_image.url }}" alt="featured image">
+                        </figure><!-- .featured-image -->
+                    {% endif %}
+
+                    <div class="entry-content">
+                        <p>{{ object.specialities|linebreaks }}</p>
+                    </div><!-- .entry-content -->
+                    {% if object.about_image %}
+                        <figure class="about-second-image">
+                            <img src="{{ object.about_image.url }}" alt="">
+                        </figure>
+                    {% endif %}
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .row -->
+
+        <div class="row">
+            <div class="col-12">
+                <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
+                    <ul class="post-share flex align-items-center order-3 order-lg-1">
+                        <label>Share</label>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    </ul><!-- .post-share -->
+
+                    <div class="comments-count order-1 order-lg-3">
+                        <a href="#">2 Comments</a>
+                    </div><!-- .comments-count -->
+                </footer><!-- .entry-footer -->
+            </div><!-- .content-wrap -->
+        </div><!-- .col -->
+    </div><!-- .container -->
+{% endblock %}

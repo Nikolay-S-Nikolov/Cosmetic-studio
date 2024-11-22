@@ -17,7 +17,8 @@ class IndexView(views.ListView):
 
 
 class TeamMemberDetailsView(views.DetailView):
-    pass
+    model = TeamMemberCard
+    template_name = 'common/team-member-details.html'
 
 
 class TeamMemberCardCreateView(views.CreateView):
@@ -58,6 +59,13 @@ class AdvCardDeleteView(views.DeleteView):
     model = IndexPageAds
     template_name = 'common/delete-advertisement.html'
     success_url = reverse_lazy('index')
+
+
+class ABoutMeDetailsView(views.DetailView):
+    template_name = 'common/about.html'
+
+    def get_object(self, queryset=None):
+        return TeamMemberCard.objects.order_by('appearance_order', '-updated_at').first()
 
 
 def about(request):
