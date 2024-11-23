@@ -5,12 +5,14 @@ from Cosmetic_studio.utils.services_mixins import TimestampedUserMixin
 
 # Create your models here.
 class Services(TimestampedUserMixin):
+    MAX_NAME_LENGTH = 150
+    MAX_SUBHEADING_LENGTH = 150
     name = models.CharField(
-        max_length=150,
+        max_length=MAX_NAME_LENGTH,
     )
 
     subheading = models.CharField(
-        max_length=150,
+        max_length=MAX_SUBHEADING_LENGTH,
     )
 
     main_image = models.ImageField(
@@ -27,18 +29,19 @@ class Services(TimestampedUserMixin):
 
 
 class ServicePricing(TimestampedUserMixin):
+    MAX_SERVICE_TYPE_LENGTH = 100
     """
     You can include BENEFITS as ServicePricing model without price
     """
     service = models.ForeignKey(
         Services,
         on_delete=models.CASCADE,
-        verbose_name='Pricing',
+        verbose_name='Service',
         related_name='pricing',
     )
 
     service_type = models.CharField(
-        max_length=100,
+        max_length=MAX_SERVICE_TYPE_LENGTH,
         verbose_name='Service Type',
     )
 
@@ -57,7 +60,7 @@ class ServicePictures(TimestampedUserMixin):
     service = models.ForeignKey(
         Services,
         on_delete=models.CASCADE,
-        verbose_name='Pictures',
+        verbose_name='Service',
         related_name='pictures',
     )
 
@@ -69,6 +72,3 @@ class ServicePictures(TimestampedUserMixin):
     def __str__(self):
         return f'Image {self.id} for {self.service}'
 
-#
-# my_services = Services.objects.filter(pk=2).first().service_pricing_set.all()[1]
-# pictures = my_services.servicepicture_set.all()

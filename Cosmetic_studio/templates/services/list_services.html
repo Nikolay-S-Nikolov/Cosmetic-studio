@@ -7,8 +7,6 @@
     {% if request.user.is_staff %}
         <div class="service-links" aria-label="Team member actions">
             <a href="{% url 'create_service' %}" class="action-link">create service</a>
-            <a href="{% url 'create_service_pricing' %}" class="action-link">create pricing</a>
-            <a href="{% url 'create_service_picture' %}" class="action-link">create pictures</a>
         </div><!-- .tags-links -->
     {% endif %}
     <div id="service-row" class="service-row">

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style_link %}
-	<link rel="stylesheet" href="{% static 'css/service_details_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/service_details_style.css' %}">
 {% endblock %}
 {% block main_content %}
 
@@ -9,9 +9,24 @@
         <div class="service-details-header">
             <h3>{{ object.name }}</h3>
         </div>
+        {% if request.user.is_staff %}
+            <div class="service-links" aria-label="Team member actions">
+                <a href="{% url 'update_service' pk=object.pk %}" class="action-link">update service</a>
+                <a href="{% url 'delete_service' pk=object.pk %}" class="action-delete-link">delete service</a>
+                <a href="{% url 'create_service_pricing' %}" class="action-link">add pricing</a>
+                <a href="{% url 'create_service_picture' %}" class="action-link">add pictures</a>
+            </div><!-- .tags-links -->
+        {% endif %}
         <div class="service-images">
             {% for picture in object.pictures.all %}
                 <img src="{{ picture.image.url }}" alt="{{ picture.image.pk }}">
+                <form action="{% url 'delete_picture' pk=picture.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="action-delete-link"
+                            style="background: none; color: red; border: none; padding: 0; cursor: pointer;">
+                        delete
+                    </button>
+                </form>
             {% endfor %}
         </div>
         <div class="service-description">
@@ -24,7 +39,21 @@
         </div>
         <div class="service-pricing">
             {% for treatment in object.pricing.all %}
+
                 <div>
+                    {% if request.user.is_staff %}
+                        <div class="service-links" aria-label="Team member actions">
+                            <a href="{% url 'update_pricing' pk=treatment.pk %}" class="action-link">update</a>
+                            <form action="{% url 'delete_pricing' pk=treatment.pk %}" method="POST"
+                                  style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="action-delete-link"
+                                        style="background: none; color: red; border: none; padding: 0; cursor: pointer;">
+                                    delete
+                                </button>
+                            </form>
+                        </div><!-- .tags-links -->
+                    {% endif %}
                     <h4>{{ treatment.service_type }}</h4>
                     <p>{{ treatment.treatment_description }}</p>
                     {% if treatment.price %}

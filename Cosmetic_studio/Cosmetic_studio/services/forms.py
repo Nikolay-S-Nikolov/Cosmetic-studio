@@ -27,6 +27,10 @@ class ServicePricingCreateForm(BaseServicePricingForm):
     pass
 
 
+class ServicePricingUpdateForm(BaseServicePricingForm):
+    pass
+
+
 class BaseServicePicturesForm(forms.ModelForm):
     class Meta:
         model = ServicePictures
