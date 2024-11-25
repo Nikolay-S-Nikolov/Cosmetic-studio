@@ -29,7 +29,7 @@ body {
 }
 
 .service-images img {
-    max-height: 400px ;
+    max-height: 400px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -76,4 +76,17 @@ body {
 /* Utility Classes */
 .text-center {
     text-align: center;
+}
+
+.action-delete-link {
+    background: none;
+    color: red;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.action-delete-form-link {
+    display: inline;
+    color: red
 }

@@ -482,6 +482,15 @@ a:hover, a:active {
     color: #2f2f2f;
 }
 
+.single-page .content-wrap .tags-links .action-delete-link {
+    background: none;
+    color: red;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
 .single-page .content-wrap .tags-links {
     margin-top: 35px;
 }
@@ -806,6 +815,7 @@ a:hover, a:active {
 .contact-page .content-wrap .entry-header {
     text-align: left;
 }
+
 
 .contact-page .content-wrap .entry-content {
     margin-top: 90px;
@@ -1283,6 +1293,11 @@ a:hover, a:active {
     font-size: 16px;
 }
 
+.form-container .btn-delete {
+    background-color: #e74c3c !important;
+}
+
+
 .form-container button[type="submit"] {
     padding: 10px 15px;
     background-color: #2f2f2f;
@@ -1293,10 +1308,14 @@ a:hover, a:active {
     transition: background-color 0.3s;
 }
 
+
 .form-container button[type="submit"]:hover {
     background-color: #444;
 }
 
+.form-container .btn-delete:hover {
+    background-color: #d62c1a !important;
+}
 
 .sidebar-ads {
     margin-top: 100px;
@@ -1310,6 +1329,14 @@ a:hover, a:active {
     width: 100%;
     box-shadow: none; /* Ensure no shadow on images */
     border: none; /* Ensure no border on images */
+}
+
+.sidebar-ads .action-delete-link{
+    color: red;
+}
+
+.sidebar-ads .action-delete-link:hover {
+    color: red;
 }
 
 .sidebar-ads a {
@@ -1337,7 +1364,10 @@ a:hover, a:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+.delete-form .btn:hover {
+    background-color: #444;
 
+}
 
 /*service page styles*/
 .service-header {
@@ -1445,10 +1475,12 @@ a:hover, a:active {
         width: 100%; /* Full width for smaller screens */
     }
 }
-.form-h2{
+
+.form-h2 {
     text-align: center;
     margin: 80px 0 50px;
 }
+
 /* end service page styles*/
 
 /*service_details page styles*/

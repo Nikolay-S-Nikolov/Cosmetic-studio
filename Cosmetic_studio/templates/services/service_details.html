@@ -22,8 +22,7 @@
                 <img src="{{ picture.image.url }}" alt="{{ picture.image.pk }}">
                 <form action="{% url 'delete_picture' pk=picture.pk %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit" class="action-delete-link"
-                            style="background: none; color: red; border: none; padding: 0; cursor: pointer;">
+                    <button type="submit" class="action-delete-link">
                         delete
                     </button>
                 </form>
@@ -44,11 +43,10 @@
                     {% if request.user.is_staff %}
                         <div class="service-links" aria-label="Team member actions">
                             <a href="{% url 'update_pricing' pk=treatment.pk %}" class="action-link">update</a>
-                            <form action="{% url 'delete_pricing' pk=treatment.pk %}" method="POST"
-                                  style="display: inline;">
+                            <form action="{% url 'delete_pricing' pk=treatment.pk %}" class="action-delete-form-link"
+                                  method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="action-delete-link"
-                                        style="background: none; color: red; border: none; padding: 0; cursor: pointer;">
+                                <button type="submit" class="action-delete-link">
                                     delete
                                 </button>
                             </form>

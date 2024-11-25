@@ -6,7 +6,9 @@
             <h1 class="title">Delete Advertisement</h1>
             <h4 class="caption mb-4">Are you sure you want to delete it?</h4>
             <img src="{{ object.adv_image.url }}" alt="adv {{ adv.name }}">
-            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+            <button type="submit" class="btn-delete btn-lg">
+                Delete
+            </button>
             {% csrf_token %}
         </form>
     </div>

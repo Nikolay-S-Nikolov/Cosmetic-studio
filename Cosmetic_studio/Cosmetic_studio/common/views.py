@@ -24,14 +24,22 @@ class TeamMemberDetailsView(views.DetailView):
 class TeamMemberCardCreateView(views.CreateView):
     model = TeamMemberCard
     fields = '__all__'
-    template_name = 'common/create-team-member.html'
+    template_name = 'shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Add Team Member',
+        'submit_button_text': 'Add',
+    }
     success_url = reverse_lazy('index')
 
 
 class TeamMemberCardUpdateView(views.UpdateView):
     model = TeamMemberCard
     fields = '__all__'
-    template_name = 'common/update-team-member.html'
+    template_name = 'shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Update Team Member',
+        'submit_button_text': 'Update',
+    }
 
     def get_success_url(self):
         return reverse("details_team_member", kwargs={"pk": self.object.pk})
@@ -45,14 +53,22 @@ class TeamMemberCardDeleteView(views.DeleteView):
 class AdvCardCreateView(views.CreateView):
     model = IndexPageAds
     fields = '__all__'
-    template_name = 'common/create-advertisement.html'
+    template_name = 'shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Create Advertisement',
+        'submit_button_text': 'Create',
+    }
     success_url = reverse_lazy('index')
 
 
 class AdvCardUpdateView(views.UpdateView):
     model = IndexPageAds
     fields = '__all__'
-    template_name = 'common/update-advertisement.html'
+    template_name = 'shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Update Advertisement',
+        'submit_button_text': 'Update',
+    }
     success_url = reverse_lazy('index')
 
 

@@ -14,7 +14,7 @@
                                 <div class="tags-links" aria-label="Team member actions">
                                     <a href="{% url 'create_team_member' %}" class="action-link">create</a>
                                     <a href="{% url 'update_team_member' pk=card.pk %}" class="action-link">update</a>
-                                    <a href="{% url 'delete_team_member' pk=card.pk %}" class="action-link">delete</a>
+                                    <a href="{% url 'delete_team_member' pk=card.pk %}" class="action-delete-link">delete</a>
                                 </div><!-- .tags-links -->
                             {% endif %}
                         </header><!-- .entry-header -->
@@ -194,7 +194,7 @@
                         <div class="sidebar-ads">
                             {% if request.user.is_staff %}
                                 <a href="{% url 'update_adv_card' pk=adv.pk %}">Update</a>
-                                <a href="{% url 'delete_adv_card' pk=adv.pk %}">Delete</a>
+                                <a href="{% url 'delete_adv_card' pk=adv.pk %}" class="action-delete-link">Delete</a>
                             {% endif %}
                             <a href="{{ adv.adv_link }}">
                                 <img src="{{ adv.adv_image.url }}" alt="adv {{ adv.name }}">

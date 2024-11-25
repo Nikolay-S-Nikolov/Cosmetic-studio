@@ -14,7 +14,11 @@ class ServicesView(views.ListView):
 
 class CreateServiceView(views.CreateView):
     form_class = ServiceCreateForm
-    template_name = 'services/create_service.html'
+    template_name = 'services/../../templates/shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Create Service',
+        'submit_button_text': 'Create',
+    }
     success_url = reverse_lazy('services')
 
     def form_valid(self, form):
@@ -25,7 +29,11 @@ class CreateServiceView(views.CreateView):
 class UpdateServiceView(views.UpdateView):
     model = Services
     form_class = ServiceUpdateForm
-    template_name = 'services/update_service.html'
+    template_name = 'services/../../templates/shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Update Service',
+        'submit_button_text': 'Update',
+    }
 
     def get_success_url(self):
         return reverse_lazy('details_service', kwargs={'pk': self.object.pk})
@@ -44,7 +52,11 @@ class ServiceDetailsView(views.DetailView):
 
 class CreateServicePricingView(views.CreateView):
     form_class = ServicePricingCreateForm
-    template_name = 'services/create_pricing.html'
+    template_name = 'services/../../templates/shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Create Pricing',
+        'submit_button_text': 'Create',
+    }
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -57,7 +69,11 @@ class CreateServicePricingView(views.CreateView):
 class UpdatePricingView(views.UpdateView):
     model = ServicePricing
     form_class = ServicePricingUpdateForm
-    template_name = 'services/update_pricing.html'
+    template_name = 'services/../../templates/shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Update Pricing',
+        'submit_button_text': 'Update',
+    }
 
     def get_success_url(self):
         return reverse_lazy('details_service', kwargs={'pk': self.object.service.pk})
@@ -72,8 +88,11 @@ class DeletePricingView(views.DeleteView):
 
 class CreateServicePicturesView(views.CreateView):
     form_class = ServicePicturesCreateForm
-    template_name = 'services/create_pictures.html'
-    success_url = reverse_lazy('index')
+    template_name = 'services/../../templates/shared_templates/form_template.html'
+    extra_context = {
+        'form_title': 'Upload Picture',
+        'submit_button_text': 'Upload',
+    }
 
     def form_valid(self, form):
         form.instance.user = self.request.user
