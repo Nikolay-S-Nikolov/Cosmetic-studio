@@ -7,6 +7,7 @@ from Cosmetic_studio.services.forms import ServiceCreateForm, ServicePricingCrea
 from Cosmetic_studio.services.models import Services, ServicePricing, ServicePictures
 
 
+# TODO implement user permissions and access control
 class ServicesView(views.ListView):
     model = Services
     template_name = 'services/list_services.html'
