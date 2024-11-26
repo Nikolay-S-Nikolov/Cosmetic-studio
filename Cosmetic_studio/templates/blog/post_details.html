@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+    <div class="container single-page blog-page">
+        <div class="row">
+            <div class="col-12">
+                <div class="content-wrap">
+                    <header class="entry-header">
+                        <div class="posted-date">
+                            {{ object.created_at|date:"F d, Y" }}
+                        </div><!-- .posted-date -->
+
+                        <h2 class="entry-title">{{ object.title }}</h2>
+
+                        <div class="tags-links">
+                            {% for tag in object.tags.all %}
+                                {# TODO create a link for tagged post list #}
+                                <a href="#">#{{ tag.name }}</a>
+                            {% endfor %}
+                        </div><!-- .tags-links -->
+                    </header><!-- .entry-header -->
+
+                    <figure class="featured-image">
+                        <img src="{{ object.main_image.url }}" alt="{{ object.title }} main picture">
+                    </figure><!-- .featured-image -->
+
+                    <div class="entry-content">
+                        {{ object.content|linebreaks }}
+                    </div><!-- .entry-content -->
+
+                    <blockquote class="blockquote-text">
+                        {{ object.blockquote|linebreaks }}
+                    </blockquote><!-- .blockquote-text -->
+
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <figure class="blog-page-half-img">
+                                <img src="{{ object.left_image.url }}" alt="{{ object.title }} left picture">
+                            </figure><!-- .blog-page-half-img -->
+                        </div><!-- .col -->
+
+                        <div class="col-12 col-md-6">
+                            <figure class="blog-page-half-img">
+                                <img src="{{ object.right_image.url }}" alt="{{ object.title }} right picture">
+                            </figure><!-- .blog-page-half-img -->
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+
+                    <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
+                        <ul class="post-share flex align-items-center order-3 order-lg-1">
+                            <label>Share</label>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        </ul><!-- .post-share -->
+
+                        <div class="comments-count order-1 order-lg-3">
+                            <a href="#">{{ object.comments.count }} Comments</a>
+                        </div><!-- .comments-count -->
+                    </footer><!-- .entry-footer -->
+                </div><!-- .content-wrap -->
+
+                <div class="content-area">
+                    <div class="post-comments">
+                        <h3 class="comments-title">Comments</h3>
+
+                        <ol class="comment-list">
+                            <li class="comment">
+                                <div class="comment-body flex justify-content-between">
+                                    <figure class="comment-author-avatar">
+                                        <img src="images/user-1.jpg" alt="user">
+                                    </figure><!-- .comment-author-avatar -->
+
+                                    <div class="comment-wrap">
+                                        <div class="comment-author flex flex-wrap align-items-center">
+                                            <span class="fn">
+                                                <a href="#">Maria Williams</a>
+                                            </span><!-- .fn -->
+
+                                            <span class="comment-meta">
+                                                <a href="#">Jan 29, 2018</a>
+                                            </span><!-- .comment-meta -->
+
+                                            <div class="reply">
+                                                <a href="#">Reply</a>
+                                            </div><!-- .reply -->
+                                        </div><!-- .comment-author -->
+
+                                        <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla
+                                            placerat, tincidunt mi. Nullam vel orci dui. Su spendisse sit amet laoreet
+                                            neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem.
+                                            Quisque in porttitor magna, a imperdiet est. Donec accumsan justo nulla, sit
+                                            amet varius urna laoreet vitae. Maecenas feugiat fringilla metus. </p>
+
+                                    </div><!-- .comment-wrap -->
+                                </div><!-- .comment-body -->
+                            </li><!-- .comment -->
+
+                            <li class="comment">
+                                <div class="comment-body flex justify-content-between">
+                                    <figure class="comment-author-avatar">
+                                        <img src="images/user-2.jpg" alt="user">
+                                    </figure><!-- .comment-author-avatar -->
+
+                                    <div class="comment-wrap">
+                                        <div class="comment-author flex flex-wrap align-items-center">
+                                            <span class="fn">
+                                                <a href="#">Lisa Moore</a>
+                                            </span><!-- .fn -->
+
+                                            <span class="comment-meta">
+                                                <a href="#">Jan 29, 2018</a>
+                                            </span><!-- .comment-meta -->
+
+                                            <div class="reply">
+                                                <a href="#">Reply</a>
+                                            </div><!-- .reply -->
+                                        </div><!-- .comment-author -->
+
+                                        <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla
+                                            placerat, tincidunt mi. Nullam vel orci dui. Su spendisse sit amet laoreet
+                                            neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem.
+                                            Quisque in porttitor magna, a imperdiet est. Donec accumsan justo nulla, sit
+                                            amet varius urna laoreet vitae. Maecenas feugiat fringilla metus. </p>
+
+                                    </div><!-- .comment-wrap -->
+                                </div><!-- .comment-body -->
+                            </li><!-- .comment -->
+                        </ol><!-- .comment-list -->
+                    </div><!-- .post-comments -->
+
+                    <div class="comments-form">
+                        <div class="comment-respond">
+                            <h3 class="comment-reply-title">Leave a reply</h3>
+
+                            <form class="comment-form">
+                                <input type="text" placeholder="Name">
+                                <input type="email" placeholder="Email">
+                                <textarea rows="18" cols="6" placeholder="Messages"></textarea>
+                                <input type="submit" value="Read More">
+                            </form><!-- .comment-form -->
+                        </div><!-- .comment-respond -->
+                    </div><!-- .comments-form -->
+                </div><!-- .content-area -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+
+{% endblock %}

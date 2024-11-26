@@ -8,11 +8,23 @@ from Cosmetic_studio.utils.blog_mixins import FieldSlugMixin
 UserModel = get_user_model()
 
 
+class Tag(FieldSlugMixin, models.Model):
+    MAX_NAME_LENGTH = 50
+
+    name = models.CharField(max_length=MAX_NAME_LENGTH)
+
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class BlogContent(FieldSlugMixin, models.Model):
     MAX_TITLE_LENGTH = 60
     MIN_TITLE_LENGTH = 3
     MAX_CONTENT_LENGTH = 3000
     MIN_CONTENT_LENGTH = 20
+    MAX_BLOCKQUOTE_LENGTH = 320
 
     slug_field = "title"
 
@@ -26,7 +38,32 @@ class BlogContent(FieldSlugMixin, models.Model):
         blank=True,
     )
 
-    content = models.TextField()
+    main_image = models.ImageField(
+        upload_to='blog_images/',
+        help_text="For optimal display, upload an image with dimensions 1280x720 pixels or an aspect ratio of 16:9 "
+    )
+
+    left_image = models.ImageField(
+        upload_to='blog_images/',
+        help_text="For optimal display, upload an image with dimensions 600x400 pixels or an aspect ratio of 3:2 "
+    )
+
+    right_image = models.ImageField(
+        upload_to='blog_images/',
+        help_text="For optimal display, upload an image with dimensions 558x391 pixels or an aspect ratio of 3:2 "
+    )
+
+    content = models.TextField(
+        max_length=MAX_CONTENT_LENGTH,
+        validators=[MinLengthValidator(MIN_CONTENT_LENGTH)],
+    )
+
+    blockquote = models.TextField(
+        max_length=MAX_BLOCKQUOTE_LENGTH,
+        null=True,
+        blank=True,
+        help_text="A highlighted quote or excerpt from the content."
+    )
 
     author = models.ForeignKey(
         UserModel,
@@ -39,7 +76,7 @@ class BlogContent(FieldSlugMixin, models.Model):
 
     published = models.BooleanField(default=False)
 
-    published_at = models.DateTimeField(null=True, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='blogs')
 
     def __str__(self):
         return self.title
@@ -88,42 +125,25 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.author} on {self.post}'
 
-
-class Tag(FieldSlugMixin, models.Model):
-    MAX_NAME_LENGTH = 50
-
-    name = models.CharField(max_length=MAX_NAME_LENGTH)
-
-    slug = models.SlugField(unique=True)
-
-    posts = models.ManyToManyField(
-        BlogContent,
-        related_name='tags',
-    )
-
-    def __str__(self):
-        return self.name
-
-
-class Image(models.Model):
-    MAX_CAPTION_LENGTH = 255
-
-    post = models.ForeignKey(
-        BlogContent,
-        verbose_name='Post',
-        on_delete=models.CASCADE,
-        related_name='images',
-    )
-
-    image = models.ImageField(
-        upload_to='blog_images/',
-    )
-
-    caption = models.CharField(
-        max_length=MAX_CAPTION_LENGTH,
-        null=True,
-        blank=True,
-    )
-
-    def __str__(self):
-        return f'Image for {self.post.title}'
+# class Image(models.Model):
+#     MAX_CAPTION_LENGTH = 255
+#
+#     post = models.ForeignKey(
+#         BlogContent,
+#         verbose_name='Post',
+#         on_delete=models.CASCADE,
+#         related_name='images',
+#     )
+#
+#     image = models.ImageField(
+#         upload_to='blog_images/',
+#     )
+#
+#     caption = models.CharField(
+#         max_length=MAX_CAPTION_LENGTH,
+#         null=True,
+#         blank=True,
+#     )
+#
+#     def __str__(self):
+#         return f'Image for {self.post.title}'

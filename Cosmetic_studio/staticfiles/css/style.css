@@ -506,7 +506,11 @@ a:hover, a:active {
 }
 
 .single-page .content-wrap .featured-image img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 1280px;
+    height: auto;
+    max-height: 720px;
+    object-fit: contain;
 }
 
 .single-page .content-wrap .entry-content {
@@ -526,7 +530,7 @@ a:hover, a:active {
     line-height: 2.2rem;
     color: #2f2f2f;
     text-align: left;
-    background: url("../images/cocktaile.png") no-repeat left center;
+    background: url("../images/face silhouette.png") no-repeat left center;
 }
 
 .single-page .blockquote-text p::first-letter {
@@ -696,6 +700,10 @@ a:hover, a:active {
 .blog-page-half-img img {
     display: block;
     width: 100%;
+    max-width: 558px;
+    height: auto;
+    max-height: 391px;
+    object-fit: contain;
 }
 
 .blog-page .content-wrap .entry-footer {
@@ -1331,7 +1339,7 @@ a:hover, a:active {
     border: none; /* Ensure no border on images */
 }
 
-.sidebar-ads .action-delete-link{
+.sidebar-ads .action-delete-link {
     color: red;
 }
 
@@ -1364,6 +1372,7 @@ a:hover, a:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
 .delete-form .btn:hover {
     background-color: #444;
 

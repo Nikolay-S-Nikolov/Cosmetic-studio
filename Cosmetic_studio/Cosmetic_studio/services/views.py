@@ -15,7 +15,7 @@ class ServicesView(views.ListView):
 
 class CreateServiceView(views.CreateView):
     form_class = ServiceCreateForm
-    template_name = 'services/../../templates/shared_templates/form_template.html'
+    template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Create Service',
         'submit_button_text': 'Create',
@@ -30,7 +30,7 @@ class CreateServiceView(views.CreateView):
 class UpdateServiceView(views.UpdateView):
     model = Services
     form_class = ServiceUpdateForm
-    template_name = 'services/../../templates/shared_templates/form_template.html'
+    template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Update Service',
         'submit_button_text': 'Update',
@@ -53,7 +53,7 @@ class ServiceDetailsView(views.DetailView):
 
 class CreateServicePricingView(views.CreateView):
     form_class = ServicePricingCreateForm
-    template_name = 'services/../../templates/shared_templates/form_template.html'
+    template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Create Pricing',
         'submit_button_text': 'Create',
@@ -70,7 +70,7 @@ class CreateServicePricingView(views.CreateView):
 class UpdatePricingView(views.UpdateView):
     model = ServicePricing
     form_class = ServicePricingUpdateForm
-    template_name = 'services/../../templates/shared_templates/form_template.html'
+    template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Update Pricing',
         'submit_button_text': 'Update',
@@ -89,7 +89,7 @@ class DeletePricingView(views.DeleteView):
 
 class CreateServicePicturesView(views.CreateView):
     form_class = ServicePicturesCreateForm
-    template_name = 'services/../../templates/shared_templates/form_template.html'
+    template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Upload Picture',
         'submit_button_text': 'Upload',

@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from Cosmetic_studio.common.views import IndexView, about, blog, contact, TeamMemberCardCreateView, AdvCardCreateView, \
+from Cosmetic_studio.common.views import IndexView, about, contact, TeamMemberCardCreateView, AdvCardCreateView, \
     AdvCardUpdateView, AdvCardDeleteView, TeamMemberCardUpdateView, TeamMemberCardDeleteView, TeamMemberDetailsView, \
     ABoutMeDetailsView
 
@@ -23,6 +23,5 @@ urlpatterns = (
         ])),
     ])),
     path('about/', about, name='about'),
-    path('blog/', blog, name='blog'),
     path('contact/', contact, name='contact'),
 )
