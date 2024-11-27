@@ -14,8 +14,7 @@
 
                         <div class="tags-links">
                             {% for tag in object.tags.all %}
-                                {# TODO create a link for tagged post list #}
-                                <a href="#">#{{ tag.name }}</a>
+                                <a href="{% url 'post-by-tag' slug=tag.slug %}">#{{ tag.name }}</a>
                             {% endfor %}
                         </div><!-- .tags-links -->
                     </header><!-- .entry-header -->
@@ -147,5 +146,4 @@
             </div><!-- .col -->
         </div><!-- .row -->
     </div><!-- .container -->
-
 {% endblock %}

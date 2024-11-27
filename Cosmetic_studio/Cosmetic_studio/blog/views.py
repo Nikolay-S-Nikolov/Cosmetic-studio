@@ -3,11 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 
 from Cosmetic_studio.blog.forms import CreatePostForm
-from Cosmetic_studio.blog.models import BlogContent
-
-
-def blog(request):
-    return render(request, 'blog/blog.html')
+from Cosmetic_studio.blog.models import BlogContent, Tag
 
 
 class CreatePostContent(views.CreateView):
@@ -28,18 +24,25 @@ class CreatePostContent(views.CreateView):
     #     return reverse("details_post", kwargs={"pk": self.object.pk})
 
 
-# class PostListViews(views.ListView):
-#     model = BlogContent
-#     template_name = 'blog/post_details.html'
-#     paginate_by = 4
-#     ordering = ['-created_at']
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['last_post'] = BlogContent.objects.last()
-#         return context
+class PostListViews(views.ListView):
+    model = BlogContent
+    template_name = 'blog/posts_list.html'
+    paginate_by = 2
+    ordering = ['-created_at']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reversed_list'] = BlogContent.objects.order_by('?')[:4]
+        context['tags_list'] = Tag.objects.order_by('name')
+        return context
 
 
 class PostDetailView(views.DetailView):
     model = BlogContent
     template_name = 'blog/post_details.html'
+
+
+class PostListByTagView(PostListViews):
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        return BlogContent.objects.filter(tags__slug=slug)

@@ -1,12 +1,13 @@
 from django.urls import path, include
 
-from Cosmetic_studio.blog.views import CreatePostContent, blog, PostDetailView
+from Cosmetic_studio.blog.views import CreatePostContent, PostListViews, PostDetailView, PostListByTagView
 
 urlpatterns = (
-    path('', blog, name='blog'),
-    path('create/', CreatePostContent.as_view(), name='create_post'),
-    path('<int:pk>/', include([
-        path('details/', PostDetailView.as_view(), name='details_post'),
+    path('', PostListViews.as_view(), name='posts-list'),
+    path('create/', CreatePostContent.as_view(), name='post-create'),
+    path('<slug:slug>/', include([
+        path('', PostListByTagView.as_view(), name='post-by-tag'),
+        path('details/', PostDetailView.as_view(), name='post-details'),
     ])),
 
 )

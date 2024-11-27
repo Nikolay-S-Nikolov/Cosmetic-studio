@@ -14,6 +14,7 @@ class BlogContentAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'created_at', 'updated_at', 'get_tags')
     list_filter = ('author', 'created_at', 'updated_at', 'tags')
     search_fields = ('title', 'author__username', 'tags__name')
+    prepopulated_fields = {'slug': ('title',)}
     inlines = [TagInline]
     filter_horizontal = ('tags',)
 
