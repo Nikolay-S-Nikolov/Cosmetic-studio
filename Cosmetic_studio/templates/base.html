@@ -24,7 +24,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{#    <link rel="stylesheet" href="{% static 'css/common_styles.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static 'css/common_styles.css' %}">#}
     {% block style_link %}
     {% endblock %}
 </head>
@@ -49,10 +49,12 @@
                             <ul class="flex align-items-center">
 
                                 <li><a href="https://www.instagram.com/tahova.rusina/"><i
-                                        class="fa fa-instagram"></i></a></li>
+                                        class="fa fa-instagram"></i></a>
+                                </li>
                                 <li>
                                     <a href="https://www.facebook.com/photo/?fbid=1990274644695908&set=pob.100003493474195&locale=bg_BG"><i
-                                            class="fa fa-facebook"></i></a></li>
+                                            class="fa fa-facebook"></i></a>
+                                </li>
                                 {% if request.user.profile.profile_picture %}
                                     <li><a href="{% url 'profile_details' %}"><img
                                             src="{{ request.user.profile.profile_picture }}" alt="Profile Picture"
@@ -126,7 +128,7 @@
                                 <li><a href="https://www.instagram.com/tahova.rusina/"><i
                                         class="fa fa-instagram"></i></a></li>
                                 <li>
-                                    <a href="https://www.facebook.com/photo/?fbid=1990274644695908&set=pob.100003493474195&locale=bg_BG"><i
+                                    <a href="https://www.facebook.com/profile.php?id=100003493474195"><i
                                             class="fa fa-facebook"></i></a></li>
                             </ul>
 
@@ -352,12 +354,13 @@
                     <div class="col-12 col-md-6">
                         <div class="footer-social">
                             <ul class="flex justify-content-center justify-content-md-end align-items-center">
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="https://www.instagram.com/tahova.rusina/"><i
+                                        class="fa fa-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/profile.php?id=100003493474195"><i
+                                            class="fa fa-facebook"></i></a>
+                                </li>
                             </ul>
                         </div><!-- .footer-social -->
                     </div><!-- .col-xl-4 -->
