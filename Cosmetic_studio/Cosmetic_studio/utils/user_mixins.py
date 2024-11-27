@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-
+from django.contrib.auth import mixins as auth_mixins
 from Cosmetic_studio.accounts.models import Profile
 
 
@@ -36,3 +36,9 @@ class GetProfileMixin:
     def get_object(self, queryset=None):
         pk = self.request.user.pk
         return Profile.objects.get(user_id=pk)
+
+
+class AuthorOrAdminMixin(auth_mixins.LoginRequiredMixin, auth_mixins.UserPassesTestMixin):
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user == comment.author or self.request.user.is_superuser

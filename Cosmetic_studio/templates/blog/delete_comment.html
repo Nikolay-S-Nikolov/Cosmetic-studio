@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+    <div class="form-container delete-form">
+        <form action="{% url 'delete-comment' pk=object.pk %}" method="post">
+            <h4 class="caption mb-4">Are you sure you want to delete your comment?</h4>
+            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+            {% csrf_token %}
+        </form>
+    </div>
+
+{% endblock %}

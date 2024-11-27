@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Cosmetic_studio.blog.models import BlogContent, Tag
+from Cosmetic_studio.blog.models import BlogContent, Tag, Comment
 
 
 class TagInline(admin.TabularInline):
@@ -34,3 +34,10 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('content', 'author', 'created_at', 'updated_at', 'approved', 'post__title')
+    list_filter = ('author', 'created_at', 'updated_at', 'content')
+    search_fields = ('content', 'author__username', 'post__title')

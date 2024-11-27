@@ -745,24 +745,29 @@ a:hover, a:active {
 
 .comment-author-avatar img {
     width: 100%;
+    max-height: 105px;
+    height: auto;
+    max-width: 105px;
+    object-fit: contain;
 }
 
 .comment-wrap {
     width: calc(100% - 84px);
 }
 
-.comment-author a {
+.comment-author .fn,.comment-meta {
     line-height: 1;
     color: #2f2f2f;
 }
 
-.comment-author .fn a,
-.comment-author .comment-meta a {
+.comment-author .fn {
     padding-right: 15px;
     margin-right: 15px;
     border-right: 2px solid #2f2f2f;
 }
-
+.comment-author .fn a{
+    margin-left: 40px;
+}
 .comment-wrap p {
     margin-top: 14px;
     font-size: 14px;

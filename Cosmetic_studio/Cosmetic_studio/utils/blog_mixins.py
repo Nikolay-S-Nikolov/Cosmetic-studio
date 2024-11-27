@@ -1,4 +1,6 @@
+from django.urls import reverse_lazy
 from django.utils.text import slugify
+from Cosmetic_studio.utils.user_mixins import AuthorOrAdminMixin
 
 
 class FieldSlugMixin:
@@ -18,3 +20,8 @@ class FieldSlugMixin:
             num += 1
 
         super().save(*args, **kwargs)
+
+
+class CommentAuthorOrAdminMixin(AuthorOrAdminMixin):
+    def get_success_url(self):
+        return reverse_lazy('post-details', kwargs={'slug': self.object.post.slug})
