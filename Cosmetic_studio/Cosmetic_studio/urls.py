@@ -25,6 +25,8 @@ urlpatterns = [
     path('accounts/', include('Cosmetic_studio.accounts.urls')),
     path('services/', include('Cosmetic_studio.services.urls')),
     path('blog/', include('Cosmetic_studio.blog.urls')),
+    path('contact/', include('Cosmetic_studio.contact.urls')),
+
 ]
 
 if settings.DEBUG:
