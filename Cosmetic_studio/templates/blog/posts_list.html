@@ -26,12 +26,13 @@
                         <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
                             <ul class="post-share flex align-items-center order-3 order-lg-1">
                                 <label>Share</label>
-                                {# TODO create share article logic #}
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
                             </ul><!-- .post-share -->
 
                             <a class="read-more order-2" href="{% url 'post-details' slug=post.slug %}">Read more</a>
@@ -83,7 +84,8 @@
                                         {{ recent_post.created_at|date:"F d, Y" }}
                                     </div><!-- .entry-header -->
 
-                                    <h3><a href="{% url 'post-details' slug=recent_post.slug %}">{{ recent_post.title }}</a>
+                                    <h3>
+                                        <a href="{% url 'post-details' slug=recent_post.slug %}">{{ recent_post.title }}</a>
                                     </h3>
 
                                     <div class="tags-links">
