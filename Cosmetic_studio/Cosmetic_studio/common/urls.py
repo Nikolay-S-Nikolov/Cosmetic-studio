@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from Cosmetic_studio.common.views import IndexView, about, contact, TeamMemberCardCreateView, AdvCardCreateView, \
+from Cosmetic_studio.common.views import IndexView, TeamMemberCardCreateView, AdvCardCreateView, \
     AdvCardUpdateView, AdvCardDeleteView, TeamMemberCardUpdateView, TeamMemberCardDeleteView, TeamMemberDetailsView, \
     ABoutMeDetailsView
 
@@ -22,6 +22,4 @@ urlpatterns = (
             path('delete-adv-card/', AdvCardDeleteView.as_view(), name='delete_adv_card'),
         ])),
     ])),
-    path('about/', about, name='about'),
-    path('contact/', contact, name='contact'),
 )

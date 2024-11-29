@@ -84,10 +84,3 @@ class ABoutMeDetailsView(views.DetailView):
     def get_object(self, queryset=None):
         return TeamMemberCard.objects.order_by('appearance_order', '-updated_at').first()
 
-
-def about(request):
-    return render(request, 'about.html')
-
-
-def contact(request):
-    return render(request, 'contact.html')

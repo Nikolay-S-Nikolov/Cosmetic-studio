@@ -23,6 +23,7 @@ class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['content'].label = "Message"
+
     class Meta:
         model = Comment
         fields = ['content']
