@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+    <div class="outer-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-header flex justify-content-center align-items-center"
+                         style="background-image: url('{% static 'images/not_found.jpg' %}')">
+                        <h1>Page not found!</h1>
+                    </div><!-- .page-header -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .hero-section -->
+    </div><!-- .outer-container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Looks like this page tried a new look... and failed miserably. Let's get you back to looking fabulous!</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <button onclick="goBack()" class="btn btn-primary">Go Back</button>
+            <a href="{% url 'index' %}" class="btn btn-secondary ml-2">Home page</a>
+        </div>
+    </div>
+
+    {% block outer_footer %}
+    {% endblock %}
+    {% block extra_js %}
+    	    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    {% endblock %}
+{% endblock %}
