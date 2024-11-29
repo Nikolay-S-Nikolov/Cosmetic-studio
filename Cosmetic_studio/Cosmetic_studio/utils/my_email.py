@@ -9,5 +9,6 @@ def send_simple_email(subject, message, recipient_list):
         message=message,
         recipient_list=recipient_list,
         from_email=settings.DEFAULT_FROM_EMAIL,
+        fail_silently=False,
     )
 

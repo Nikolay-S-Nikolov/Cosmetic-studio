@@ -12,8 +12,7 @@ class ContactInfo(models.Model):
         )],
     )
     working_time = models.TextField()
-    address = models.CharField(max_length=200)
-    email = models.EmailField(unique=True)
+    address = models.TextField(max_length=200)
     custom_message = models.TextField()
     visible = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
