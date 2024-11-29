@@ -11,10 +11,12 @@ class ContactInfo(models.Model):
             message="Please, enter a valid phone number in the format 0888123456"
         )],
     )
-    working_time = models.CharField(max_length=200)
+    working_time = models.TextField()
     address = models.CharField(max_length=200)
     email = models.EmailField(unique=True)
     custom_message = models.TextField()
+    visible = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Contact Information: {self.phone_number}"
