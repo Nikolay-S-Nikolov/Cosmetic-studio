@@ -33,7 +33,7 @@ class PostListViews(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['reversed_list'] = BlogContent.objects.order_by('?')[:4]
+        context['random_list'] = BlogContent.objects.order_by('?')[:4]
         context['tags_list'] = Tag.objects.order_by('name')
         return context
 

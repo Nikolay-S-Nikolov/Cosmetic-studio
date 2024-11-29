@@ -72,7 +72,7 @@
                         {% endfor %}
                     </div><!-- .tags-list -->
                     <div class="recent-posts">
-                        {% for recent_post in reversed_list %}
+                        {% for recent_post in random_list %}
                             <div class="recent-post-wrap">
                                 <figure>
                                     <img src="{{ recent_post.main_image.url }}"
