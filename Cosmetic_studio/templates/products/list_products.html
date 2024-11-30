@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+    <div class="service-header">
+        <h2 class="name">PRODUCTS</h2>
+    </div>
+    <div id="service-row" class="service-row">
+        {% for product in object_list %}
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }} picture">
+                </div>
+                <div class="service-details">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description|truncatechars:100 }}</p>
+                    <a href="{% url 'details_product' slug=product.slug %}" class="learn-more-btn">SEE DETAILS</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

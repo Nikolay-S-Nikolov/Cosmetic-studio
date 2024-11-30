@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     "Cosmetic_studio.accounts.apps.AccountsConfig",
     "Cosmetic_studio.services.apps.ServicesConfig",
     "Cosmetic_studio.blog.apps.BlogConfig",
-    "Cosmetic_studio.contact.apps.ContactConfig"
+    "Cosmetic_studio.contact.apps.ContactConfig",
+    "Cosmetic_studio.product.apps.ProductConfig"
 ]
 
 MIDDLEWARE = [

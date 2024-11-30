@@ -41,7 +41,6 @@ class Product(models.Model):
 
     slug = models.SlugField(
         unique=True,
-        editable=False,
     )
 
     user = models.ForeignKey(
@@ -56,7 +55,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         num = 1
-        if not self.slug:
+        if not self.slug and not self.pk:
             self.slug = slugify(f'{self.brand}-{self.name}-{num}')
 
         original_slug = self.slug

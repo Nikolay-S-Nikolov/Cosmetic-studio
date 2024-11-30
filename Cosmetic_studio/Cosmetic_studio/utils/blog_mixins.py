@@ -7,7 +7,7 @@ class FieldSlugMixin:
     slug_field = "name"
 
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if not self.slug and not self.pk:
             self.slug = slugify(self.slug_field)
 
         original_slug = self.slug
