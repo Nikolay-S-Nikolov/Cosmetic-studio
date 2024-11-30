@@ -49,7 +49,7 @@
                             <a class="read-more order-2" href="{% url 'details_team_member' pk=card.pk %}">Read more</a>
 
                             <div class="comments-count order-1 order-lg-3">
-                                <a href="#">2 Comments</a>
+                                <p>2 Comments</p>
                             </div><!-- .comments-count -->
                         </footer><!-- .entry-footer -->
                     </div><!-- .content-wrap -->
@@ -86,60 +86,7 @@
                             treatments, I combine artistry and precision to enhance natural beauty. My goal is to boost
                             confidence and empower every client.</p>
                     </div><!-- .about-me -->
-
-                    <div class="recent-posts">
-                        <div class="recent-post-wrap">
-                            <figure>
-                                <img src="{% static 'images/thumb-1.jpg' %}" alt="">
-                            </figure>
-
-                            <header class="entry-header">
-                                <div class="posted-date">
-                                    January 30, 2018
-                                </div><!-- .entry-header -->
-
-                                <h3><a href="#">My fall in love story</a></h3>
-
-                                <div class="tags-links">
-                                    <a href="#">1#winter</a>
-                                    <a href="#">#love</a>
-                                    <a href="#">#snow</a>
-                                    <a href="#">#january</a>
-                                </div><!-- .tags-links -->
-                            </header><!-- .entry-header -->
-                        </div><!-- .recent-post-wrap -->
-
-                        <div class="recent-post-wrap">
-                            <figure>
-                                <img src="{% static 'images/thumb-4.jpg' %}" alt="">
-                            </figure>
-
-                            <header class="entry-header">
-                                <div class="posted-date">
-                                    January 30, 2018
-                                </div><!-- .entry-header -->
-
-                                <h3><a href="#">My fall in love story</a></h3>
-
-                                <div class="tags-links">
-                                    <a href="#">#winter</a>
-                                    <a href="#">#love</a>
-                                    <a href="#">#snow</a>
-                                    <a href="#">#january</a>
-                                </div><!-- .tags-links -->
-                            </header><!-- .entry-header -->
-                        </div><!-- .recent-post-wrap -->
-                    </div><!-- .recent-posts -->
-
-                    <div class="tags-list">
-                        <a href="#">Music</a>
-                        <a href="#">Love</a>
-                        <a href="#">Car</a>
-                        <a href="#">Stories</a>
-                        <a href="#">Photography</a>
-                        <a href="#">Music</a>
-                        <a href="#">Car</a>
-                    </div><!-- .tags-list -->
+                    {% include 'partials/sidebar_tags_posts.html' %}
                     {% if request.user.is_staff %}
                         <div class="sidebar-adv-links">
                             <a href="{% url 'create_adv_card' %}">Create Advertisement</a>

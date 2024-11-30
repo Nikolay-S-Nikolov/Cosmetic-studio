@@ -1,0 +1,31 @@
+<div class="tags-list">
+    {% for tag in tags_list %}
+        <a href="{% url 'post-by-tag' slug=tag.slug %}">{{ tag.name }}</a>
+    {% endfor %}
+</div><!-- .tags-list -->
+<div class="recent-posts">
+    {% for recent_post in random_list %}
+        <div class="recent-post-wrap">
+            <figure>
+                <img src="{{ recent_post.main_image.url }}"
+                     alt="{{ recent_post.title }} main picture">
+            </figure>
+
+            <header class="entry-header">
+                <div class="posted-date">
+                    {{ recent_post.created_at|date:"F d, Y" }}
+                </div><!-- .entry-header -->
+
+                <h3>
+                    <a href="{% url 'post-details' slug=recent_post.slug %}">{{ recent_post.title }}</a>
+                </h3>
+
+                <div class="tags-links">
+                    {% for tag in recent_post.tags.all %}
+                        <a href="{% url 'post-by-tag' slug=tag.slug %}">#{{ tag.name }}</a>
+                    {% endfor %}
+                </div><!-- .tags-links -->
+            </header><!-- .entry-header -->
+        </div><!-- .recent-post-wrap -->
+    {% endfor %}
+</div><!-- .recent-posts -->

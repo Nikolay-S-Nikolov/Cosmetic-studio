@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
+from Cosmetic_studio.blog.models import BlogContent, Tag
 from Cosmetic_studio.common.models import TeamMemberCard, IndexPageAds
+from Cosmetic_studio.services.models import Services
 
 
 class IndexView(views.ListView):
@@ -12,7 +14,10 @@ class IndexView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['ads'] = IndexPageAds.objects.all().order_by("-created_at")
+        context['ads'] = IndexPageAds.objects.all().order_by("-created_at")[:2]
+        context['footer_services'] = Services.objects.order_by("-created_at")[:4]
+        context['random_list'] = BlogContent.objects.order_by('?')[:2]
+        context['tags_list'] = Tag.objects.order_by('name')
         return context
 
 
@@ -80,7 +85,9 @@ class AdvCardDeleteView(views.DeleteView):
 
 class ABoutMeDetailsView(views.DetailView):
     template_name = 'common/about.html'
+    extra_context = {
+        'footer_services': Services.objects.order_by("-created_at")[:4]
+    }
 
     def get_object(self, queryset=None):
         return TeamMemberCard.objects.order_by('appearance_order', '-updated_at').first()
-

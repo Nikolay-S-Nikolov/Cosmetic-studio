@@ -50,6 +50,11 @@ class ServiceDetailsView(views.DetailView):
     model = Services
     template_name = 'services/service_details.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['footer_services'] = Services.objects.order_by("?")[:4]
+        return context
+
 
 class CreateServicePricingView(views.CreateView):
     form_class = ServicePricingCreateForm

@@ -1,0 +1,32 @@
+<div class="outer-container">
+    <div class="container-fluid">
+        <div class="row footer-recent-posts">
+            {% for service in footer_services %}
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="footer-post-wrap flex justify-content-between">
+                        <figure>
+                            <a href="{% url 'details_service' pk=service.pk %}"><img
+                                    src="{{ service.main_image.url }}" alt="{{ service.name }} image"></a>
+                        </figure>
+                        <div class="footer-post-cont flex flex-column justify-content-between">
+                            <header class="entry-header">
+                                <h3><a href="{% url 'details_service' pk=service.pk %}">{{ service.name|truncatechars:30 }}</a>
+                                </h3>
+                                <div class="tags-links">
+                                    <a href="{% url 'details_service' pk=service.pk %}">
+                                        {{ service.subheading|truncatechars:60 }}
+                                    </a>
+                                </div><!-- .tags-links -->
+                            </header><!-- .entry-header -->
+                            <footer class="entry-footer">
+                                <a class="read-more" href="{% url 'details_service' pk=service.pk %}">
+                                    learn more
+                                </a>
+                            </footer><!-- .entry-footer -->
+                        </div><!-- .footer-post-cont -->
+                    </div><!-- .footer-post-wrap -->
+                </div><!-- .col -->
+            {% endfor %}
+        </div><!-- .row -->
+    </div><!-- .container-fluid -->
+</div><!-- .outer-container -->
