@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load cart_tag %}
+
+{% block main_content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Your Shopping Cart</h2>
+        {% if object_list %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in object_list %}
+                    <tr>
+                        <td>
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                 style="width: 50px; height: 50px; object-fit: cover;">
+                        </td>
+                        <td>
+                            {{ item.product.name }}
+                        </td>
+                        <td>${{ item.product.price }}</td>
+                        <td>
+                            {#                        {% url 'update-cart-item' item.id %}#}
+                            <form method="post" action="#" class="form-inline">
+                                {% csrf_token %}
+                                <button type="submit" name="action" value="decrease" class="btn btn-sm btn-secondary">
+                                    -
+                                </button>
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                       class="form-control mx-2" style="width: 60px;">
+                                <button type="submit" name="action" value="increase" class="btn btn-sm btn-secondary">
+                                    +
+                                </button>
+                            </form>
+                        </td>
+                        <td>${{ item.product.price|multiply:item.quantity }}</td>
+                        <td>
+                            {#                        {% url 'remove-from-cart' item.id %}#}
+                            <a href="#" class="btn btn-danger btn-sm">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="row justify-content-end">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cart Total</h5>
+                            <p class="card-text">Total: ${{ total }}</p>
+                            <div class="row">
+                                <div class="col-6 pr-1">
+                                    <a href="{% url 'list_products' %}" class="btn btn-secondary btn-block">Back to
+                                        Shop</a>
+                                </div>
+                                <div class="col-6 pl-1">
+                                    <a href="#" class="btn btn-primary btn-block">Checkout</a>
+                                </div>
+                            </div>
+                            {#                        {% url 'checkout' %}#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>Your cart is empty. <a href="{% url 'list_products' %}">Continue shopping</a></p>
+        {% endif %}
+    </div>
+{% endblock %}

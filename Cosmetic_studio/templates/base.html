@@ -72,6 +72,16 @@
                                 {% else %}
                                     <li><a href="{% url 'login_user' %}">Login</a></li>
                                 {% endif %}
+
+                                <ul class="flex justify-content-center align-items-center">
+                                    <li>
+                                        <a href="{% url 'cart_summary' %}">
+                                            <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li><a href="{% url 'cart_summary' %}">Cart</a></li>
+                                </ul>
+
                             </ul>
                         </div><!-- .header-bar-social -->
                     </div><!-- .col -->
@@ -106,7 +116,7 @@
                             {% endif %}
                         </ul>
                         <div class="header-bar-social d-md-none">
-                            <ul class="flex justify-content-center align-items-center">
+                            <ul class="flex justify-content-center align-items-center m-3">
                                 {% if request.user.profile.profile_picture %}
                                     <li><img src="{{ request.user.profile.profile_picture }}" alt="Profile Picture"
                                              class="profile-pic" style="width: 30px; height: 30px; border-radius: 50%;">
@@ -121,6 +131,14 @@
                                 {% else %}
                                     <li><a href="{% url 'login_user' %}">Login</a>
                                 {% endif %}
+                            </ul>
+                            <ul class="flex justify-content-center align-items-center">
+                                <li>
+                                    <a href="{% url 'cart_summary' %}">
+                                        <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li><a href="{% url 'cart_summary' %}">Cart</a></li>
                             </ul>
                         </div>
                         <div class="header-bar-social d-md-none">
