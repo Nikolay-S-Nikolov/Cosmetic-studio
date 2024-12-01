@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from Cosmetic_studio.orders.views import AddToCartView, CartSummaryView, UpdateCartItemView, RemoveFromCartView, \
-    CheckoutView, OrderConfirmationView
+    CheckoutView, OrderConfirmationView, OrderHistoryView, OrderDetailView
 
 urlpatterns = (
     path('<slug:slug>/', include([
@@ -12,4 +12,6 @@ urlpatterns = (
     path('remove-cart-item/<int:pk>/', RemoveFromCartView.as_view(), name='remove_cart_item'),
     path('checkout/', CheckoutView.as_view(), name='checkout_order'),
     path('order-confirmation/<int:pk>', OrderConfirmationView.as_view(), name='order_confirmation'),
+    path('order-history/', OrderHistoryView.as_view(), name='order_history'),
+    path('<int:pk>/', OrderDetailView.as_view(), name='order_detail'),
 )

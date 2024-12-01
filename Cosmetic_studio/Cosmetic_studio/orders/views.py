@@ -113,7 +113,7 @@ class CheckoutView(auth_mixins.LoginRequiredMixin, views.FormView):
             return redirect('cart_summary')
 
         order = form.save()
-        self.order_id=order.id
+        self.order_id = order.id
 
         OrderItem.objects.bulk_create([
             OrderItem(
@@ -149,3 +149,21 @@ class OrderConfirmationView(auth_mixins.LoginRequiredMixin, views.DetailView):
         context = super().get_context_data(**kwargs)
         context['order_items'] = self.object.items.all()
         return context
+
+
+class OrderHistoryView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = Order
+    template_name = 'orders/order_history.html'
+    # context_object_name = 'orders'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Order.objects.filter(customer=self.request.user).order_by('-created_at')
+
+
+class OrderDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
+    model = Order
+    template_name = 'orders/order_detail.html'
+
+    def get_queryset(self):
+        return Order.objects.filter(customer=self.request.user)

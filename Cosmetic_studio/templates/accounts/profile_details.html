@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style_link %}
-
     <link rel="shortcut icon" href="../../staticfiles/images/favicon.png">
 
     <!-- Bootstrap CSS -->
@@ -9,6 +8,11 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="{% static 'css/user/style.css' %}">
+
+    {{ block.super }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/user/profile.css' %}">
+
 {% endblock %}
 {% block big_image %}
 
@@ -18,6 +22,9 @@
         <div class="bg-img" style="background-image: url('{% static 'images/main.jpg' %}')"></div>
         <div class="form-wrap">
             <div class="form-inner">
+                <a href="{% url 'order_history' %}" class="viewlink">
+                    <i class="fas fa-history"></i> Check Your Order History Here
+                </a>
                 <h1 class="title text-center mb-4">Profile Details</h1>
                 {% if messages %}
                     <ul class="messages">
@@ -45,20 +52,28 @@
                         </tr>
                         <tr>
                             <th scope="row">Profile picture:</th>
-                            <td>{% if object.profile_picture %}
-                                <img src="{{ object.profile_picture }}" alt="Profile Picture" class="img-thumbnail mt-2"
-                                     style="max-width: 150px;">
-                            {% else %}
-                                <p>No profile picture available.</p>
-                            {% endif %}</td>
+                            <td>
+                                {% if object.profile_picture %}
+                                    <img src="{{ object.profile_picture }}" alt="Profile Picture"
+                                         class="img-thumbnail mt-2"
+                                         style="max-width: 150px;">
+                                {% else %}
+                                    <p>No profile picture available.</p>
+                                {% endif %}
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="profile-actions d-flex justify-content-between">
-                    <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary btn-lg">Edit Profile</a>
-                    <a href="{% url 'change_password' %}" class="btn btn-outline-primary btn-lg">Change Password</a>
-                    <a href="{% url 'delete_profile' %}" class="btn btn-outline-danger btn-lg">Delete Profile</a>
+                    <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit
+                        Profile</a>
+                    <a href="{% url 'change_password' %}" class="btn btn-outline-primary"><i class="fas fa-key"></i>
+                        Change Password</a>
+                    <a href="{% url 'order_history' %}" class="btn btn-outline-primary"><i class="fas fa-history"></i>
+                        Order History</a>
+                    <a href="{% url 'delete_profile' %}" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i>
+                        Delete Profile</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,54 @@
+.site-wrap {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.bg-img {
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+}
+
+.form-wrap {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.viewlink {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.viewlink:hover {
+    text-decoration: underline;
+}
+
+.profile-info {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.profile-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.profile-actions a {
+    flex: 1 1 200px;
+}
+
+@media (max-width: 768px) {
+    .profile-actions {
+        flex-direction: column;
+    }
+}

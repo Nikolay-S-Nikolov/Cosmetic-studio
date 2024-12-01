@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <div class="container mt-5">
+        <h2 class="service-header name mb-4">Order History</h2>
+        {% if object_list %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in object_list %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.created_at|date:"d F Y H:i" }}</td>
+                        <td>${{ order.total_price }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>
+                            <a href="{% url 'order_detail' pk=order.pk %}" class="btn btn-sm btn-info">View Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You haven't placed any orders yet.</p>
+        {% endif %}
+        <div class="pagination m-4">
+            <ul class="flex align-items-center">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="active"><a href="#">{{ num }}</a></li>
+                    {% else %}
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
