@@ -1,6 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import mixins as auth_mixins
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 from django.views import generic as views
 
 from Cosmetic_studio.orders.models import Cart, CartItem
@@ -18,15 +21,14 @@ class AddToCartView(auth_mixins.LoginRequiredMixin, views.View):
             cart_item.quantity += 1
             cart_item.save()
             messages.info(request, f"The {product.name} quantity was updated to {cart_item.quantity}.")
+
         else:
             messages.info(request, f"The {product.name} was added to your cart.")
-            # TODO check message
 
         return redirect("details_product", slug=slug)
 
 
 class CartSummaryView(auth_mixins.LoginRequiredMixin, views.ListView):
-
     model = CartItem
     template_name = "products/cart_summary.html"
     context_object_name = 'object_list'
@@ -41,3 +43,36 @@ class CartSummaryView(auth_mixins.LoginRequiredMixin, views.ListView):
         context['total'] = sum(item.product.price * item.quantity for item in cart.items.all())
         context['footer_services'] = Services.objects.order_by("?")[:4]
         return context
+
+
+class UpdateCartItemView(auth_mixins.LoginRequiredMixin, views.View):
+
+    def post(self, request, pk):
+        cart_item = get_object_or_404(CartItem, pk=pk, cart__user=request.user)
+
+        if self.request.user != cart_item.cart.user:  # redundant check as an  extra layer of security
+            raise PermissionDenied("You don't have permission to modify this cart item.")
+
+        action = request.POST.get('action')
+
+        if action == 'increase':
+            cart_item.quantity += 1
+        else:
+            cart_item.quantity = max(1, cart_item.quantity - 1)
+
+        cart_item.save()
+        messages.success(request, f"{cart_item.product.name} quantity updated to {cart_item.quantity}.")
+        return HttpResponseRedirect(reverse('cart_summary'))
+
+
+class RemoveFromCartView(auth_mixins.LoginRequiredMixin, views.View):
+    def post(self, request, pk):
+        cart_item = get_object_or_404(CartItem, pk=pk, cart__user=request.user)
+
+        if self.request.user != cart_item.cart.user:  # redundant check as an  extra layer of security
+            raise PermissionDenied("You don't have permission to remove this cart item.")
+
+        product_name = cart_item.product.name
+        cart_item.delete()
+        messages.success(request, f"{product_name} removed from your cart.")
+        return HttpResponseRedirect(reverse('cart_summary'))
