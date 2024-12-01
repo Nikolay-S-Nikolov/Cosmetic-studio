@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import RegexValidator
 from django.db import models
 
 from Cosmetic_studio.product.models import Product
@@ -104,6 +105,28 @@ class CartItem(models.Model):
 
 class ShippingAddress(models.Model):
     MAX_CITY_LENGTH = 50
+    MAX_NAME_LENGTH = 35
+    MAX_PHONE_NUMBER_LENGTH = 10
+    MAX_POSTAL_CODE_LENGTH = 10
+    MAX_PAYMENT_METHOD_LENGTH = 20
+    PAYMENT_CHOICES = [
+        ('pay_on_delivery', 'Pay on Delivery'),
+        ('bank_payment', 'Bank Payment'),
+    ]
+
+    name = models.CharField(
+        max_length=MAX_CITY_LENGTH,
+    )
+
+    phone_number = models.CharField(
+        max_length=MAX_PHONE_NUMBER_LENGTH,
+        validators=[RegexValidator(
+            regex=r"^0\d{9}$",
+            message="Please, enter a valid phone number in the format 0888123456"
+        )]
+    )
+
+    email = models.EmailField()
 
     customer = models.ForeignKey(
         UserModel,
@@ -122,7 +145,13 @@ class ShippingAddress(models.Model):
     )
 
     postal_code = models.CharField(
-        max_length=10,
+        max_length=MAX_POSTAL_CODE_LENGTH,
+    )
+
+    payment_method = models.CharField(
+        max_length=MAX_PAYMENT_METHOD_LENGTH,
+        choices=PAYMENT_CHOICES,
+        default='pay_on_delivery'
     )
 
     created_at = models.DateTimeField(

@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third-party apps
+    'widget_tweaks',
+    
     # my apps
     "Cosmetic_studio.common.apps.CommonConfig",
     "Cosmetic_studio.accounts.apps.AccountsConfig",

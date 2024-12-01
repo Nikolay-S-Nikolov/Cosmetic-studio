@@ -3,10 +3,11 @@ from django.contrib.auth import mixins as auth_mixins
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 
-from Cosmetic_studio.orders.models import Cart, CartItem
+from Cosmetic_studio.orders.forms import CheckoutForm
+from Cosmetic_studio.orders.models import Cart, CartItem, OrderItem
 from Cosmetic_studio.product.models import Product
 from Cosmetic_studio.services.models import Services
 
@@ -30,7 +31,7 @@ class AddToCartView(auth_mixins.LoginRequiredMixin, views.View):
 
 class CartSummaryView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = CartItem
-    template_name = "products/cart_summary.html"
+    template_name = "orders/cart_summary.html"
     context_object_name = 'object_list'
 
     def get_queryset(self):
@@ -76,3 +77,62 @@ class RemoveFromCartView(auth_mixins.LoginRequiredMixin, views.View):
         cart_item.delete()
         messages.success(request, f"{product_name} removed from your cart.")
         return HttpResponseRedirect(reverse('cart_summary'))
+
+
+class CheckoutView(auth_mixins.LoginRequiredMixin, views.FormView):
+    template_name = 'orders/checkout.html'
+    form_class = CheckoutForm
+    # success_url = reverse_lazy('order_confirmation') # TODO: Update this to redirect to the order confirmation page
+    success_url = reverse_lazy('index')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.get_cart_items().exists():
+            print('Checked')
+            messages.warning(request, "Your cart is empty. Please add items before proceeding to checkout.")
+            return redirect('cart_summary')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_items = self.get_cart_items()
+        context['cart_items'] = cart_items
+        context['total'] = self.calculate_total_price(cart_items)
+        return context
+
+    def form_valid(self, form):
+        cart_items = self.get_cart_items()
+
+        if not cart_items.exists():  # extra safety check
+            messages.error(self.request, "Your cart is empty. Unable to process the order.")
+            return redirect('cart_summary')
+
+
+
+        order = form.save()
+
+        OrderItem.objects.bulk_create([
+            OrderItem(
+                order=order,
+                product=cart_item.product,
+                quantity=cart_item.quantity,
+                price=cart_item.product.price
+            ) for cart_item in cart_items
+        ])
+
+        cart_items.delete()
+
+        messages.success(self.request, "Your order has been placed successfully!")
+        return super().form_valid(form)
+
+    @staticmethod
+    def calculate_total_price(items):
+        total_price = sum(item.product.price * item.quantity for item in items)
+        return total_price
+
+    def get_cart_items(self):
+        return CartItem.objects.filter(cart__user=self.request.user).select_related('product').all()
