@@ -755,7 +755,7 @@ a:hover, a:active {
     width: calc(100% - 84px);
 }
 
-.comment-author .fn,.comment-meta {
+.comment-author .fn, .comment-meta {
     line-height: 1;
     color: #2f2f2f;
 }
@@ -765,9 +765,11 @@ a:hover, a:active {
     margin-right: 15px;
     border-right: 2px solid #2f2f2f;
 }
-.comment-author .fn a{
+
+.comment-author .fn a {
     margin-left: 40px;
 }
+
 .comment-wrap p {
     margin-top: 14px;
     font-size: 14px;
@@ -1496,66 +1498,7 @@ a:hover, a:active {
 }
 
 /* end service page styles*/
-
-/*service_details page styles*/
-/*.service-details-container {*/
-/*    max-width: 800px;*/
-/*    margin: 0 auto;*/
-/*    padding: 20px;*/
-/*    background-color: #f9f9f9;*/
-/*    border-radius: 8px;*/
-/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*.service-details-header {*/
-/*    text-align: center;*/
-/*    margin-bottom: 20px;*/
-/*}*/
-
-/*.service-details-header h3 {*/
-/*    font-size: 2em;*/
-/*    color: #333;*/
-/*}*/
-
-/*.service-images {*/
-/*    display: flex;*/
-/*    overflow-x: auto;*/
-/*    gap: 10px;*/
-/*    margin-bottom: 20px;*/
-/*}*/
-
-/*.service-images img {*/
-/*    max-width: 100%;*/
-/*    height: auto;*/
-/*    border-radius: 8px;*/
-/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*.service-description {*/
-/*    margin-bottom: 20px;*/
-/*}*/
-
-/*.service-description h4 {*/
-/*    font-size: 1.5em;*/
-/*    color: #555;*/
-/*}*/
-
-/*.service-description p {*/
-/*    color: #666;*/
-/*    line-height: 1.6;*/
-/*}*/
-
-/*.service-pricing {*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*.service-pricing h4 {*/
-/*    font-size: 1.2em;*/
-/*    color: #444;*/
-/*}*/
-
-/*.service-pricing p {*/
-/*    color: #777;*/
-/*    margin-bottom: 10px;*/
-/*}*/
-/* end service_details page styles */
+.shipping-details {
+    line-height: 1.2;
+    color: #6c757d;
+}

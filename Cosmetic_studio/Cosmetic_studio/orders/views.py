@@ -7,7 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 
 from Cosmetic_studio.orders.forms import CheckoutForm
-from Cosmetic_studio.orders.models import Cart, CartItem, OrderItem
+from Cosmetic_studio.orders.models import Cart, CartItem, OrderItem, Order
 from Cosmetic_studio.product.models import Product
 from Cosmetic_studio.services.models import Services
 
@@ -82,12 +82,13 @@ class RemoveFromCartView(auth_mixins.LoginRequiredMixin, views.View):
 class CheckoutView(auth_mixins.LoginRequiredMixin, views.FormView):
     template_name = 'orders/checkout.html'
     form_class = CheckoutForm
-    # success_url = reverse_lazy('order_confirmation') # TODO: Update this to redirect to the order confirmation page
-    success_url = reverse_lazy('index')
+    order_id = None
+
+    def get_success_url(self):
+        return reverse_lazy('order_confirmation', kwargs={'pk': self.order_id})
 
     def dispatch(self, request, *args, **kwargs):
         if not self.get_cart_items().exists():
-            print('Checked')
             messages.warning(request, "Your cart is empty. Please add items before proceeding to checkout.")
             return redirect('cart_summary')
         return super().dispatch(request, *args, **kwargs)
@@ -111,9 +112,8 @@ class CheckoutView(auth_mixins.LoginRequiredMixin, views.FormView):
             messages.error(self.request, "Your cart is empty. Unable to process the order.")
             return redirect('cart_summary')
 
-
-
         order = form.save()
+        self.order_id=order.id
 
         OrderItem.objects.bulk_create([
             OrderItem(
@@ -136,3 +136,16 @@ class CheckoutView(auth_mixins.LoginRequiredMixin, views.FormView):
 
     def get_cart_items(self):
         return CartItem.objects.filter(cart__user=self.request.user).select_related('product').all()
+
+
+class OrderConfirmationView(auth_mixins.LoginRequiredMixin, views.DetailView):
+    model = Order
+    template_name = 'orders/order_confirmation.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Order, pk=self.kwargs['pk'], customer=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order_items'] = self.object.items.all()
+        return context
