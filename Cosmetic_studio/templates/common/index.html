@@ -6,6 +6,15 @@
     <div class="container single-page">
         <div class="row">
             <div class="col-12 col-lg-9">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} " role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 {% for card in object_list %}
                     <div class="content-wrap">
                         <header class="entry-header">

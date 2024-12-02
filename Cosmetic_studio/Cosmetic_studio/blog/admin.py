@@ -38,6 +38,16 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('content', 'author', 'created_at', 'updated_at', 'approved', 'post__title')
+    list_display = ('post', 'content', 'author', 'created_at', 'updated_at', 'approved',)
     list_filter = ('author', 'created_at', 'updated_at', 'content')
-    search_fields = ('content', 'author__username', 'post__title')
+    search_fields = ('content', 'author__username', 'post')
+    readonly_fields = ('author', 'post','created_at', 'updated_at')
+
+    fieldsets = (
+        ('Comment', {
+            'fields': ('post', 'content', 'author', 'approved')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )

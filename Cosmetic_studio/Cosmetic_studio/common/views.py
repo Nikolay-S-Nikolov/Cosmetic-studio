@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
-
 from Cosmetic_studio.blog.models import BlogContent, Tag
 from Cosmetic_studio.common.models import TeamMemberCard, IndexPageAds
 from Cosmetic_studio.services.models import Services
+from Cosmetic_studio.utils.common_mixins import StaffRequiredMixin, CommonMessageMixin
 
 
 class IndexView(views.ListView):
@@ -26,9 +25,20 @@ class TeamMemberDetailsView(views.DetailView):
     template_name = 'common/team-member-details.html'
 
 
-class TeamMemberCardCreateView(views.CreateView):
+class TeamMemberCardCreateView(CommonMessageMixin, StaffRequiredMixin, views.CreateView):
     model = TeamMemberCard
-    fields = '__all__'
+    fields = [
+        'name',
+        'picture',
+        'featured_image',
+        'about_image',
+        'title',
+        'description',
+        'role',
+        'specialities',
+        'is_active',
+        'appearance_order',
+    ]
     template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Add Team Member',
@@ -36,10 +46,25 @@ class TeamMemberCardCreateView(views.CreateView):
     }
     success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
-class TeamMemberCardUpdateView(views.UpdateView):
+
+class TeamMemberCardUpdateView(CommonMessageMixin, StaffRequiredMixin, views.UpdateView):
     model = TeamMemberCard
-    fields = '__all__'
+    fields = [
+        'name',
+        'picture',
+        'featured_image',
+        'about_image',
+        'title',
+        'description',
+        'role',
+        'specialities',
+        'is_active',
+        'appearance_order',
+    ]
     template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Update Team Member',
@@ -50,37 +75,55 @@ class TeamMemberCardUpdateView(views.UpdateView):
         return reverse("details_team_member", kwargs={"pk": self.object.pk})
 
 
-class TeamMemberCardDeleteView(views.DeleteView):
+class TeamMemberCardDeleteView(CommonMessageMixin,StaffRequiredMixin, views.DeleteView):
     model = TeamMemberCard
     template_name = 'common/delete-team-member.html'
+    success_url = reverse_lazy('index')
 
 
-class AdvCardCreateView(views.CreateView):
+class AdvCardCreateView(CommonMessageMixin,StaffRequiredMixin, views.CreateView):
     model = IndexPageAds
-    fields = '__all__'
+    fields = [
+        'name',
+        'adv_description',
+        'adv_link',
+        'adv_image'
+    ]
     template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Create Advertisement',
         'submit_button_text': 'Create',
     }
     success_url = reverse_lazy('index')
+    object_name = 'Advertisement'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 
-class AdvCardUpdateView(views.UpdateView):
+class AdvCardUpdateView(CommonMessageMixin,StaffRequiredMixin, views.UpdateView):
     model = IndexPageAds
-    fields = '__all__'
+    fields = [
+        'name',
+        'adv_description',
+        'adv_link',
+        'adv_image'
+    ]
     template_name = 'shared_templates/form_template.html'
     extra_context = {
         'form_title': 'Update Advertisement',
         'submit_button_text': 'Update',
     }
     success_url = reverse_lazy('index')
+    object_name = 'Advertisement'
 
 
-class AdvCardDeleteView(views.DeleteView):
+class AdvCardDeleteView(CommonMessageMixin,StaffRequiredMixin, views.DeleteView):
     model = IndexPageAds
     template_name = 'common/delete-advertisement.html'
     success_url = reverse_lazy('index')
+    object_name = 'Advertisement'
 
 
 class ABoutMeDetailsView(views.DetailView):

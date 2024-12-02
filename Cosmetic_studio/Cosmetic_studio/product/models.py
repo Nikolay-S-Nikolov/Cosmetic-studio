@@ -54,12 +54,13 @@ class Product(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        num = 1
-        if not self.slug and not self.pk:
-            self.slug = slugify(f'{self.brand}-{self.name}-{num}')
+        if not self.pk:
+            num = 1
+            if not self.slug:
+                self.slug = slugify(f'{self.brand}-{self.name}-{num}')
 
-        original_slug = self.slug
-        while self.__class__.objects.filter(slug=self.slug).exists():
-            self.slug = f"{original_slug}-{num}"
-            num += 1
+            original_slug = self.slug
+            while self.__class__.objects.filter(slug=self.slug).exists():
+                self.slug = f"{original_slug}-{num}"
+                num += 1
         super().save(*args, **kwargs)

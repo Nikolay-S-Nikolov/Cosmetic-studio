@@ -6,6 +6,15 @@
             <div class="col-12">
                 <div class="content-wrap">
                     <header class="entry-header">
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} " role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                         {% if request.user.is_staff %}
                             <div class="posted-date">
                                 {{ object.created_at|date:"F d, Y" }}

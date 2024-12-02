@@ -6,7 +6,7 @@ from django.contrib import auth
 class StudioUserManager(auth_models.BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email, password, **extra_fields):
+    def _create_user(self, email, password=None, **extra_fields):
         """
         Create and save a user with the given email, and password.
         """
