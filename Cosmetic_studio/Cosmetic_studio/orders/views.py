@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import mixins as auth_mixins
 from django.core.exceptions import PermissionDenied
+from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -124,6 +125,18 @@ class CheckoutView(auth_mixins.LoginRequiredMixin, views.FormView):
             ) for cart_item in cart_items
         ])
 
+        for item in cart_items:
+            item.product.units_sold += item.quantity
+            item.product.save()
+
+        # Too complicated approach for updating units sold for few products at once.
+        # product_updates = {item.product_id: F('units_sold') + item.quantity for item in cart_items}
+        # # print(product_updates)  # for debugging purposes
+        # Product.objects.filter(id__in=product_updates.keys()).update(
+        #     **{'units_sold': product_updates[product.id] for product in
+        #        Product.objects.filter(id__in=product_updates.keys())}
+        # )
+
         cart_items.delete()
 
         messages.success(self.request, "Your order has been placed successfully!")
@@ -154,7 +167,6 @@ class OrderConfirmationView(auth_mixins.LoginRequiredMixin, views.DetailView):
 class OrderHistoryView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Order
     template_name = 'orders/order_history.html'
-    # context_object_name = 'orders'
     paginate_by = 5
 
     def get_queryset(self):

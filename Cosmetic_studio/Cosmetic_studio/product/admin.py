@@ -25,4 +25,6 @@ class ProductAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if not obj.slug:
             obj.slug = slugify(f'{obj.brand}-{obj.name}')
+        if not obj.user:
+            obj.user = request.user
         super().save_model(request, obj, form, change)

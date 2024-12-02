@@ -21,7 +21,6 @@ class Order(models.Model):
         UserModel,
         on_delete=models.CASCADE,
     )
-
     status = models.CharField(
         max_length=MAX_STATUS_LENGTH,
         choices=STATUS_CHOICES,
