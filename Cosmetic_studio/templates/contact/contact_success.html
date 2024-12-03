@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+    <div class="outer-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-header flex justify-content-center align-items-center"
+                         style="background-image: url('{% static 'images/contact.jpg' %}')">
+                        <h1>Contact Success</h1>
+                    </div><!-- .page-header -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .hero-section -->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} " role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="container single-page contact-page">
+            <div class="row">
+                <div class="col-12 col-lg-9">
+                    <div class="content-wrap">
+                        <header class="entry-header">
+                            <h2 class="entry-title">Thank you for your message!</h2>
+                        </header><!-- .entry-header -->
+                        <div class="entry-content">
+                            <p>Asynchronous emails sent in: {{ async_time }} seconds</p>
+                            <p>Synchronous emails sent in: {{ sync_time }} seconds</p>
+                        </div><!-- .entry-content -->
+                    </div><!-- .content-wrap -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .outer-container -->
+{% endblock %}

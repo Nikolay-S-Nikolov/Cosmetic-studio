@@ -34,7 +34,7 @@
                             </figure><!-- .featured-image -->
                         {% else %}
                             <figure class="featured-image">
-                                <img src="{% static 'images/default team member.jpg' %}"
+                                <img src="{% static 'images/default_team_member.jpg' %}"
                                      alt="Default Team Member Picture">
                             </figure><!-- .featured-image -->
                         {% endif %}
@@ -58,7 +58,6 @@
                             <a class="read-more order-2" href="{% url 'details_team_member' pk=card.pk %}">Read more</a>
 
                             <div class="comments-count order-1 order-lg-3">
-                                <p>2 Comments</p>
                             </div><!-- .comments-count -->
                         </footer><!-- .entry-footer -->
                     </div><!-- .content-wrap -->

@@ -11,18 +11,34 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 from django.urls import reverse_lazy
+
+# Quick-start development settings - unsuitable for production, see https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# import logging
+
+# Set up logging
+# logging.basicConfig(level=logging.DEBUG)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# Load environment variables from .env file
+load_dotenv(BASE_DIR / '.env')
+
+# Log the path and existence of .env file
+# logging.debug(f".env file path: {env_path}")
+# logging.debug(f".env file exists: {env_path.exists()}")
+
+# Log the value of SECRET_KEY
+# logging.debug(f"SECRET_KEY: {SECRET_KEY}")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-boo3i7kuqcf$sl=qd5g$!$m$xu#4qjv#n!pl9s^2twj%p45(=7'
-SECRET_KEY = os.environ.get("SECRET_KEY", None)
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -45,7 +61,7 @@ INSTALLED_APPS = [
 
     # third-party apps
     'widget_tweaks',
-    
+
     # my apps
     "Cosmetic_studio.common.apps.CommonConfig",
     "Cosmetic_studio.accounts.apps.AccountsConfig",
@@ -86,6 +102,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Cosmetic_studio.wsgi.application'
+
+ASGI_APPLICATION = 'Cosmetic_studio.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -144,7 +162,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     BASE_DIR / "staticfiles",
