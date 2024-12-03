@@ -1,3 +1,4 @@
+from django.contrib.messages import views as message_views
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -5,15 +6,18 @@ from django.views import generic as views
 from Cosmetic_studio.services.forms import ServiceCreateForm, ServicePricingCreateForm, ServicePicturesCreateForm, \
     ServiceUpdateForm, ServicePricingUpdateForm
 from Cosmetic_studio.services.models import Services, ServicePricing, ServicePictures
+from Cosmetic_studio.utils.services_mixins import OnlyForStaffMixin
 
 
 # TODO implement user permissions and access control
+# TODO add messages for success and failure
 class ServicesView(views.ListView):
     model = Services
     template_name = 'services/list_services.html'
 
 
-class CreateServiceView(views.CreateView):
+class CreateServiceView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.CreateView):
+    success_message = 'Service created successfully.'
     form_class = ServiceCreateForm
     template_name = 'shared_templates/form_template.html'
     extra_context = {
@@ -27,7 +31,8 @@ class CreateServiceView(views.CreateView):
         return super().form_valid(form)
 
 
-class UpdateServiceView(views.UpdateView):
+class UpdateServiceView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.UpdateView):
+    success_message = 'Service updated successfully.'
     model = Services
     form_class = ServiceUpdateForm
     template_name = 'shared_templates/form_template.html'
@@ -40,7 +45,8 @@ class UpdateServiceView(views.UpdateView):
         return reverse_lazy('details_service', kwargs={'pk': self.object.pk})
 
 
-class DeleteServiceView(views.DeleteView):
+class DeleteServiceView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.DeleteView):
+    success_message = 'Service deleted successfully.'
     model = Services
     template_name = 'services/delete_service.html'
     success_url = reverse_lazy('services')
@@ -56,7 +62,8 @@ class ServiceDetailsView(views.DetailView):
         return context
 
 
-class CreateServicePricingView(views.CreateView):
+class CreateServicePricingView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.CreateView):
+    success_message = 'Pricing created successfully.'
     form_class = ServicePricingCreateForm
     template_name = 'shared_templates/form_template.html'
     extra_context = {
@@ -72,7 +79,8 @@ class CreateServicePricingView(views.CreateView):
         return reverse_lazy('details_service', kwargs={'pk': self.object.service.pk})
 
 
-class UpdatePricingView(views.UpdateView):
+class UpdatePricingView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.UpdateView):
+    success_message = 'Pricing updated successfully.'
     model = ServicePricing
     form_class = ServicePricingUpdateForm
     template_name = 'shared_templates/form_template.html'
@@ -85,14 +93,16 @@ class UpdatePricingView(views.UpdateView):
         return reverse_lazy('details_service', kwargs={'pk': self.object.service.pk})
 
 
-class DeletePricingView(views.DeleteView):
+class DeletePricingView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.DeleteView):
+    success_message = 'Pricing deleted successfully.'
     model = ServicePricing
 
     def get_success_url(self):
         return reverse_lazy('details_service', kwargs={'pk': self.object.service.pk})
 
 
-class CreateServicePicturesView(views.CreateView):
+class CreateServicePicturesView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.CreateView):
+    success_message = 'Picture uploaded successfully.'
     form_class = ServicePicturesCreateForm
     template_name = 'shared_templates/form_template.html'
     extra_context = {
@@ -108,7 +118,8 @@ class CreateServicePicturesView(views.CreateView):
         return reverse_lazy('details_service', kwargs={'pk': self.object.service.pk})
 
 
-class DeleteServicePicturesView(views.DeleteView):
+class DeleteServicePicturesView(message_views.SuccessMessageMixin, OnlyForStaffMixin, views.DeleteView):
+    success_message = 'Picture deleted successfully.'
     model = ServicePictures
 
     def get_success_url(self):

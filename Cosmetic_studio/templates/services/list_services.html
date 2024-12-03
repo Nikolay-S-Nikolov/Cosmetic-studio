@@ -4,6 +4,15 @@
     <div class="service-header">
         <h2 class="name">SERVICES</h2>
     </div>
+    {% if messages %}
+        <ul class="messages flex justify-content-center">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} " role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
     {% if request.user.is_staff %}
         <div class="service-links" aria-label="Team member actions">
             <a href="{% url 'create_service' %}" class="action-link">create service</a>

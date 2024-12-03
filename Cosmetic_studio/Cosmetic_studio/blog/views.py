@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -56,6 +57,7 @@ class PostDetailView(views.DetailView):
             comment.post = self.object
             comment.author = request.user
             comment.save()
+            messages.success(self.request, 'Your comment has been posted successfully.')
 
         return redirect('post-details', slug=slug)
 
@@ -75,7 +77,19 @@ class EditCommentView(CommentAuthorOrAdminMixin, views.UpdateView):
         'submit_button_text': 'Done',
     }
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'Your comment has been updated successfully.')
+        return response
+
+
+# TODO add success message
 
 class DeleteCommentView(CommentAuthorOrAdminMixin, views.DeleteView):
     model = Comment
     template_name = "blog/delete_comment.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'Your comment has been deleted successfully.')
+        return response
