@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="page-header flex justify-content-center align-items-center"
                          style="background-image: url('{% static 'images/not_found.jpg' %}')">
-                        <h1>Page not found!</h1>
+                        <h1>Access Denied</h1>
                     </div><!-- .page-header -->
                 </div><!-- .col -->
             </div><!-- .row -->
@@ -16,8 +16,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h2>Looks like this page tried a new look... and failed miserably. Let's get you back to looking
-                    fabulous!</h2>
+                <h2>"Oops! You don’t have permission to access this page. If you think this is a mistake, please <a
+                        href="{% url 'contact' %}">contact me</a> or return to the homepage."</h2>
             </div>
         </div>
     </div>
