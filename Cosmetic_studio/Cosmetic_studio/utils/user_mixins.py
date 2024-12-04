@@ -5,12 +5,6 @@ from django.contrib.auth import mixins as auth_mixins
 from Cosmetic_studio.accounts.models import Profile
 
 
-# TODO create mixins for:
-# RestrictedUserAccessMixin - only for superusers or owners extends LoginRequiredMixin
-# LogoutRequiredMixin only for unauthenticated users
-# PageRestrictionMixin - only for is_staff and is_superuser extends LoginRequiredMixin
-# RestrictedStaffUsers - only for superusers extends LoginRequiredMixin
-
 class RedirectUserMixin:
     redirect_authenticated_users = False  # Set to True to redirect authenticated users to the index page
     redirect_unauthenticated_users = False  # Set to True to redirect unauthenticated users to the login page

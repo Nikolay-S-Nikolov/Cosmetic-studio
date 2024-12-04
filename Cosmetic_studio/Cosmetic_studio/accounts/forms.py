@@ -68,5 +68,3 @@ class ChangePassword(auth_forms.PasswordChangeForm):
 
     class Meta:
         model = UserModel
-
-# TODO implement reset password

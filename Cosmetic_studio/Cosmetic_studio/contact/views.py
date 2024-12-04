@@ -1,7 +1,9 @@
 import asyncio
 import time
 
+from asgiref.sync import sync_to_async
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.messages import views as message_views
 from django.urls import reverse_lazy
@@ -32,7 +34,7 @@ class ContactPageInfo(message_views.SuccessMessageMixin, views.FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object'] = ContactInfo.objects.filter(visible=True).order_by('-created_at').first()
-        context['random_list'] = BlogContent.objects.order_by('?')[:2]
+        context['random_list'] = BlogContent.objects.order_by('?').prefetch_related('tags')[:2]
         context['tags_list'] = Tag.objects.order_by('name')
         return context
 
@@ -51,14 +53,30 @@ class AsyncEmailView(View):
     form_class = ContactForm
     success_message = 'Thank you for your message. We will get back to you shortly.'
 
+    @sync_to_async
+    def get_user_info(self, request):
+        if request.user.is_authenticated:
+            return {
+                'name': request.user.profile.get_profile_name(),
+                'email': request.user.email,
+                'phone': request.user.profile.phone_number
+            }
+        return {}
+
     async def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            start_time = time.time()  # Start time
+            user_info = await self.get_user_info(request)
+            form.cleaned_data.update(user_info)
+
+            start_time = time.time()
             await self.form_valid(form)
-            end_time = time.time()  # End time
-            async_time = end_time - start_time  # Calculate total time
-            self.request.session['async_time'] = async_time  # Store in session
+            end_time = time.time()
+            async_time = end_time - start_time
+            # self.request.session['async_time'] = async_time  # Store in session
+
+            await self.store_async_time_in_session(async_time)
+
             return render(
                 request,
                 'contact/contact_success.html',
@@ -85,6 +103,9 @@ class AsyncEmailView(View):
             send_simple_email_async(subject, message, [settings.MY_EMAIL]),
         )
 
+    @sync_to_async
+    def store_async_time_in_session(self, async_time):
+        self.request.session['async_time'] = async_time
 # for testing purposes
 
 # import asyncio

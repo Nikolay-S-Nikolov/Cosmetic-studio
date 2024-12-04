@@ -11,4 +11,3 @@ UserModel = get_user_model()
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-        # TODO send email notification (you can update your profile with adding picture and phone number here)

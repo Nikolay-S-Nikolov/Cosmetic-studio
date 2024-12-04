@@ -68,7 +68,7 @@
                         </ul><!-- .post-share -->
 
                         <div class="comments-count order-1 order-lg-3">
-                            <p>{{ object.comments.count }} Comments</p>
+                            <p>{{ object.comment_count }} Comments</p>
                         </div><!-- .comments-count -->
                     </footer><!-- .entry-footer -->
                 </div><!-- .content-wrap -->
@@ -78,7 +78,7 @@
                         <h3 class="comments-title">Comments</h3>
 
                         <ol class="comment-list">
-                            {% for comment in object.comments.all %}
+                            {% for comment in comments %}
                                 <li class="comment">
                                     <div class="comment-body flex justify-content-between">
                                         <figure class="comment-author-avatar">
@@ -139,4 +139,8 @@
             </div><!-- .col -->
         </div><!-- .row -->
     </div><!-- .container -->
+{% endblock %}
+
+{% block outer_footer %}
+	
 {% endblock %}

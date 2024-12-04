@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Count
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -32,9 +33,13 @@ class PostListViews(views.ListView):
     paginate_by = 2
     ordering = ['-created_at']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.annotate(comment_count=Count('comments'))
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['random_list'] = BlogContent.objects.order_by('?')[:4]
+        context['random_list'] = BlogContent.objects.order_by('?').prefetch_related('tags')[:4]
         context['tags_list'] = Tag.objects.order_by('name')
         return context
 
@@ -43,9 +48,16 @@ class PostDetailView(views.DetailView):
     model = BlogContent
     template_name = 'blog/post_details.html'
 
+    def get_queryset(self):
+        return BlogContent.objects.select_related('author').prefetch_related(
+            'tags',
+            'comments__author__profile',
+        ).annotate(comment_count=Count('comments'))
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = CommentForm()
+        context['comments'] = self.object.comments.all()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -65,7 +77,7 @@ class PostDetailView(views.DetailView):
 class PostListByTagView(PostListViews):
     def get_queryset(self):
         slug = self.kwargs.get('slug')
-        return BlogContent.objects.filter(tags__slug=slug)
+        return BlogContent.objects.filter(tags__slug=slug).annotate(comment_count=Count('comments'))
 
 
 class EditCommentView(CommentAuthorOrAdminMixin, views.UpdateView):
@@ -82,8 +94,6 @@ class EditCommentView(CommentAuthorOrAdminMixin, views.UpdateView):
         messages.success(self.request, f'Your comment has been updated successfully.')
         return response
 
-
-# TODO add success message
 
 class DeleteCommentView(CommentAuthorOrAdminMixin, views.DeleteView):
     model = Comment

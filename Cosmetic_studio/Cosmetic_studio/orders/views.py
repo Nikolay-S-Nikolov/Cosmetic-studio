@@ -37,12 +37,12 @@ class CartSummaryView(auth_mixins.LoginRequiredMixin, views.ListView):
 
     def get_queryset(self):
         cart, created = Cart.objects.get_or_create(user=self.request.user)
-        return cart.items.all()
+        return cart.items.select_related('product').all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart = Cart.objects.get(user=self.request.user)
-        context['total'] = sum(item.product.price * item.quantity for item in cart.items.all())
+        cart_items = context['object_list']
+        context['total'] = sum(item.product.price * item.quantity for item in cart_items)
         context['footer_services'] = Services.objects.order_by("?")[:4]
         return context
 

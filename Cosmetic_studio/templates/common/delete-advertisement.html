@@ -5,7 +5,7 @@
         <form action="{% url 'delete_adv_card' pk=object.pk %}" method="post">
             <h1 class="title">Delete Advertisement</h1>
             <h4 class="caption mb-4">Are you sure you want to delete it?</h4>
-            <img src="{{ object.adv_image.url }}" alt="adv {{ adv.name }}">
+            <img src="{{ object.adv_image.url }}" alt="adv {{ object.name }}">
             <button type="submit" class="btn-delete btn-lg">
                 Delete
             </button>
@@ -13,4 +13,7 @@
         </form>
     </div>
 
+{% endblock %}
+{% block outer_footer %}
+	
 {% endblock %}

@@ -15,7 +15,7 @@ class IndexView(views.ListView):
         context = super().get_context_data(**kwargs)
         context['ads'] = IndexPageAds.objects.all().order_by("-created_at")[:2]
         context['footer_services'] = Services.objects.order_by("-created_at")[:4]
-        context['random_list'] = BlogContent.objects.order_by('?')[:2]
+        context['random_list'] = BlogContent.objects.order_by('?').prefetch_related('tags')[:2]
         context['tags_list'] = Tag.objects.order_by('name')
         return context
 

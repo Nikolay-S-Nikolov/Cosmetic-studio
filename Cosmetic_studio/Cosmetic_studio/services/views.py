@@ -9,8 +9,6 @@ from Cosmetic_studio.services.models import Services, ServicePricing, ServicePic
 from Cosmetic_studio.utils.services_mixins import OnlyForStaffMixin
 
 
-# TODO implement user permissions and access control
-# TODO add messages for success and failure
 class ServicesView(views.ListView):
     model = Services
     template_name = 'services/list_services.html'
@@ -53,8 +51,11 @@ class DeleteServiceView(message_views.SuccessMessageMixin, OnlyForStaffMixin, vi
 
 
 class ServiceDetailsView(views.DetailView):
-    model = Services
     template_name = 'services/service_details.html'
+
+    def get_queryset(self):
+        queryset = Services.objects.filter(pk=self.kwargs['pk']).prefetch_related('pricing', 'pictures')
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

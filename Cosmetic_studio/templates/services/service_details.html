@@ -28,7 +28,7 @@
         {% endif %}
         <div class="service-images">
             {% for picture in object.pictures.all %}
-                <img src="{{ picture.image.url }}" alt="{{ picture.image.pk }}">
+                <img src="{{ picture.image.url }}" alt="{{ picture.id }}">
                 {% if request.user.is_staff %}
                     <form action="{% url 'delete_picture' pk=picture.pk %}" method="POST">
                         {% csrf_token %}
