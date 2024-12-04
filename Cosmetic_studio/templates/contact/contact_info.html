@@ -61,7 +61,7 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}
-                        <form class="contact-form" method="post">
+                        <form class="contact-form" action="{% url 'async_send_email' %}" method="post">
                             <h4>Send me a message</h4>
                             {% csrf_token %}
                             {% for field in form %}
@@ -122,3 +122,133 @@
     {% block outer_footer %}
     {% endblock %}
 {% endblock %}
+
+
+
+{#for testing purposes #}
+
+
+{#{% extends 'base.html' %}#}
+{#{% load static %}#}
+{#{% block main_content %}#}
+{#    <div class="outer-container">#}
+{#        <div class="container-fluid">#}
+{#            <div class="row">#}
+{#                <div class="col-12">#}
+{#                    <div class="page-header flex justify-content-center align-items-center"#}
+{#                         style="background-image: url('{% static 'images/contact.jpg' %}')">#}
+{#                        <h1>Contact</h1>#}
+{#                    </div><!-- .page-header -->#}
+{#                </div><!-- .col -->#}
+{#            </div><!-- .row -->#}
+{#        </div><!-- .hero-section -->#}
+{#        <div class="container single-page contact-page">#}
+{#            <div class="row">#}
+{#                <div class="col-12 col-lg-9">#}
+{#                    <div class="content-wrap">#}
+{#                        <header class="entry-header">#}
+{#                            <h2 class="entry-title">Feel free to get in touch using the contact form or the details#}
+{#                                provided below.</h2>#}
+{#                        </header><!-- .entry-header -->#}
+{#                        <div class="contact-page-social">#}
+{#                            <ul class="flex align-items-center">#}
+{#                                {% if object.phone_number %}#}
+{#                                    <li><a href="tel:{{ object.phone_number }}"><i class="fa fa-phone"></i></a></li>#}
+{#                                    <li><a href="https://wa.me/{{ object.phone_number }}"><i class="fa fa-whatsapp"></i></a>#}
+{#                                    </li>#}
+{#                                {% endif %}#}
+{#                                <li><a href="https://www.facebook.com/share/19i41xLFMJ/" target="_blank"><i#}
+{#                                        class="fa fa-facebook"></i></a></li>#}
+{#                                <li><a href="https://www.instagram.com/tahova.rusina/" target="_blank"><i#}
+{#                                        class="fa fa-instagram"></i></a></li>#}
+{#                            </ul>#}
+{#                        </div><!-- .header-bar-social -->#}
+{##}
+{#                        <div class="entry-content">#}
+{##}
+{#                            {% if object.custom_message %}#}
+{#                                <p>{{ object.custom_message|linebreaks }}</p>#}
+{#                            {% endif %}#}
+{##}
+{#                            {% if object.working_time %}#}
+{#                                <p><strong>Working time:</strong></p>#}
+{#                                <p>{{ object.working_time|linebreaks }}</p>#}
+{#                            {% endif %}#}
+{##}
+{#                            {% if object.address %}#}
+{#                                <p><strong>Address:</strong></p>#}
+{#                                <p>{{ object.address|linebreaks }}</p>#}
+{#                            {% endif %}#}
+{##}
+{#                        </div><!-- .entry-content -->#}
+{##}
+{#                        {% if messages %}#}
+{#                            <ul class="messages">#}
+{#                                {% for message in messages %}#}
+{#                                    <div class="alert alert-{{ message.tags }} " role="alert">#}
+{#                                        {{ message }}#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{#                        {% endif %}#}
+{#                        <form class="contact-form" method="post">#}
+{#                            <h4>Send me a message</h4>#}
+{#                            {% csrf_token %}#}
+{#                            {% for field in form %}#}
+{#                                {{ field }}#}
+{#                                {% if field.errors %}#}
+{#                                    <div class="error">{{ field.errors }}</div>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                            <input type="submit" value="Submit">#}
+{#                        </form><!-- .contact-form -->#}
+{##}
+{#                    </div><!-- .content-wrap -->#}
+{#                </div><!-- .col -->#}
+{##}
+{#                <div class="col-12 col-lg-3">#}
+{#                    <div class="sidebar">#}
+{#                        <div class="tags-list">#}
+{#                            <div class="tags-list">#}
+{#                                {% for tag in tags_list %}#}
+{#                                    <a href="{% url 'post-by-tag' slug=tag.slug %}">{{ tag.name }}</a>#}
+{#                                {% endfor %}#}
+{#                            </div><!-- .tags-list -->#}
+{#                        </div><!-- .tags-list -->#}
+{#                        <div class="recent-posts">#}
+{#                            {% for recent_post in random_list %}#}
+{#                                <div class="recent-post-wrap">#}
+{#                                    <figure>#}
+{#                                        <img src="{{ recent_post.main_image.url }}"#}
+{#                                             alt="{{ recent_post.title }} main picture">#}
+{#                                    </figure>#}
+{##}
+{#                                    <header class="entry-header">#}
+{#                                        <div class="posted-date">#}
+{#                                            {{ recent_post.created_at|date:"F d, Y" }}#}
+{#                                        </div><!-- .entry-header -->#}
+{##}
+{#                                        <h3>#}
+{#                                            <a href="{% url 'post-details' slug=recent_post.slug %}">{{ recent_post.title }}</a>#}
+{#                                        </h3>#}
+{##}
+{#                                        <div class="tags-links">#}
+{#                                            {% for tag in recent_post.tags.all %}#}
+{#                                                <a href="{% url 'post-by-tag' slug=tag.slug %}">#{{ tag.name }}</a>#}
+{#                                            {% endfor %}#}
+{#                                        </div><!-- .tags-links -->#}
+{#                                    </header><!-- .entry-header -->#}
+{#                                </div><!-- .recent-post-wrap -->#}
+{#                            {% endfor %}#}
+{#                        </div><!-- .recent-posts -->#}
+{##}
+{##}
+{#                    </div><!-- .sidebar -->#}
+{#                </div><!-- .col -->#}
+{#            </div><!-- .row -->#}
+{#        </div><!-- .container -->#}
+{#    </div><!-- .outer-container -->#}
+{##}
+{#    {% block outer_footer %}#}
+{#    {% endblock %}#}
+{#{% endblock %}#}
