@@ -4,13 +4,13 @@ from Cosmetic_studio.utils.user_mixins import AuthorOrAdminMixin
 
 
 class FieldSlugMixin:
-    slug_field = "name"
+    slug_field = None
 
     def save(self, *args, **kwargs):
         if not self.pk:
             num = 1
             if not self.slug:
-                self.slug = slugify(self.slug_field-{num})
+                self.slug = slugify(f"{self.get_slug_field()}-{num}")
 
             original_slug = self.slug
 
@@ -22,6 +22,10 @@ class FieldSlugMixin:
                 num += 1
 
         super().save(*args, **kwargs)
+
+    def get_slug_field(self):
+        slug_field = self.name if self.slug_field is None else self.title
+        return slug_field
 
 
 class CommentAuthorOrAdminMixin(AuthorOrAdminMixin):
