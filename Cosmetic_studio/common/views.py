@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 from Cosmetic_studio.blog.models import BlogContent, Tag
@@ -134,3 +135,7 @@ class ABoutMeDetailsView(views.DetailView):
 
     def get_object(self, queryset=None):
         return TeamMemberCard.objects.order_by('appearance_order', '-updated_at').first()
+
+
+def health_check(request):
+    return JsonResponse({'status': 'ok'}, status=200)

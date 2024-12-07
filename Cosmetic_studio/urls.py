@@ -19,6 +19,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from Cosmetic_studio.common.views import health_check
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("Cosmetic_studio.common.urls")),
@@ -28,6 +30,7 @@ urlpatterns = [
     path('orders/', include('Cosmetic_studio.orders.urls')),
     path('blog/', include('Cosmetic_studio.blog.urls')),
     path('contact/', include('Cosmetic_studio.contact.urls')),
+    path('health/', health_check, name='health_check'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
