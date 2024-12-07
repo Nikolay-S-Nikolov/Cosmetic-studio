@@ -71,6 +71,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -117,11 +118,11 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ.get("POSTGRES_DB", None),
-            "USER": os.environ.get("POSTGRES_USER", None),
-            "PASSWORD": os.environ.get("POSTGRES_PASSWORD", None),
-            "HOST": os.environ.get("POSTGRES_HOST", None),
-            "PORT": os.environ.get("POSTGRES_PORT"),
+            "NAME": os.environ.get("DB_NAME", None),
+            "USER": os.environ.get("DB_USER", None),
+            "PASSWORD": os.environ.get("DB_PASSWORD", None),
+            "HOST": os.environ.get("DB_HOST", None),
+            "PORT": os.environ.get("DB_PORT", 5432),
         }
     }
 
@@ -166,9 +167,9 @@ STATICFILES_DIRS = (
     BASE_DIR / "staticfiles",
 )
 
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = BASE_DIR / "static/"
+STATIC_ROOT = BASE_DIR / "static_files/"
 
 MEDIA_URL = "media/"
 
@@ -192,7 +193,6 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", None)
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", None)
 MY_EMAIL = os.environ.get("MY_EMAIL", None)
-
 
 SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", None) == 'True'
 if SECURE_SSL_REDIRECT:
