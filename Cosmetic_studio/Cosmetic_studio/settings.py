@@ -14,7 +14,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 import logging.config
 
-
 from django.urls import reverse_lazy
 
 # Quick-start development settings - unsuitable for production, see https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -39,17 +38,13 @@ load_dotenv(BASE_DIR / '.env')
 # logging.debug(f"SECRET_KEY: {SECRET_KEY}")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-boo3i7kuqcf$sl=qd5g$!$m$xu#4qjv#n!pl9s^2twj%p45(=7'
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = True
 # python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", None) == "True"
 
-if not DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-else:
-    ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", None).split(",")
 
 # Application definition
 
@@ -107,6 +102,7 @@ WSGI_APPLICATION = 'Cosmetic_studio.wsgi.application'
 
 ASGI_APPLICATION = 'Cosmetic_studio.asgi.application'
 
+CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -191,49 +187,52 @@ LOGOUT_REDIRECT_URL = reverse_lazy("index")
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", None)
 EMAIL_HOST = os.environ.get("EMAIL_HOST", None)
 EMAIL_PORT = os.environ.get("EMAIL_PORT", None)
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = os.environ.get("EMAIL_PORT", None) == 'True'
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", None)
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", None)
 MY_EMAIL = os.environ.get("MY_EMAIL", None)
 
 
+SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", None) == 'True'
+if SECURE_SSL_REDIRECT:
+    SESSION_COOKIE_SECURE = SECURE_SSL_REDIRECT
+    CSRF_COOKIE_SECURE = SECURE_SSL_REDIRECT
 
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'debug.log'),
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple',
+#         },
+#         'file': {
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'debug.log'),
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console', 'file'],
+#             'level': 'DEBUG' if DEBUG else 'INFO',
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['file'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#         },
+#     },
+# }
