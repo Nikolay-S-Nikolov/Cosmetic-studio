@@ -13,10 +13,10 @@ import os
 from pathlib import Path
 
 from azure.storage.blob._blob_service_client import BlobServiceClient
-from dotenv import load_dotenv
 import logging.config
 
 from django.urls import reverse_lazy
+from dotenv.main import load_dotenv
 
 # import logging
 
@@ -39,9 +39,8 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ.get("SECRET_KEY", None)
 # python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
-DEBUG = os.environ.get("DEBUG", None) == "True"
-print(DEBUG)
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", None).split(",")
+DEBUG = os.environ.get("DEBUG", False) == "True"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", '').split(",")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -144,21 +143,34 @@ USE_I18N = True
 
 USE_TZ = True
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-
-AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME") # Azure storage account name
+AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")  # Azure storage account name
 AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")  # Azure access key
 AZURE_STORAGE_CONNECTION_STRING = os.environ.get('AZURE_STORAGE_CONNECTION_STRING')
-blob_service_client = BlobServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
 AZURE_MEDIA_CONTAINER = os.environ.get("AZURE_MEDIA_CONTAINER", "media")  # Azure container name for media files
 AZURE_STATIC_CONTAINER = os.environ.get("AZURE_STATIC_CONTAINER", "static")  # Azure container name for static files
 # Generate a custom domain for Azure Blob Storage
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 
-MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
-
-STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "account_name": AZURE_ACCOUNT_NAME,
+            "account_key": AZURE_ACCOUNT_KEY,
+            "connection_string": AZURE_STORAGE_CONNECTION_STRING,
+            "container_name": AZURE_MEDIA_CONTAINER,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "account_name": AZURE_ACCOUNT_NAME,
+            "account_key": AZURE_ACCOUNT_KEY,
+            "connection_string": AZURE_STORAGE_CONNECTION_STRING,
+            "container_name": AZURE_STATIC_CONTAINER,
+        },
+    },
+}
 
 if DEBUG:
     STATIC_URL = '/static/'
@@ -167,6 +179,9 @@ if DEBUG:
 
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media_images/"
+else:
+    MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
+    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
