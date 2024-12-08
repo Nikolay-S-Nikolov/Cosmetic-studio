@@ -144,11 +144,10 @@ USE_TZ = True
 
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
-AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME"),  # Azure storage account name
+AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME") # Azure storage account name
 AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")  # Azure access key
 AZURE_MEDIA_CONTAINER = os.environ.get("AZURE_MEDIA_CONTAINER", "media")  # Azure container name for media files
 AZURE_STATIC_CONTAINER = os.environ.get("AZURE_STATIC_CONTAINER", "static")  # Azure container name for static files
-
 # Generate a custom domain for Azure Blob Storage
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 
