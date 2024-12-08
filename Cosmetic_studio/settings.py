@@ -16,7 +16,6 @@ import logging.config
 
 from django.urls import reverse_lazy
 
-# Quick-start development settings - unsuitable for production, see https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 # import logging
 
 # Set up logging
@@ -25,8 +24,6 @@ from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 # Load environment variables from .env file
 load_dotenv(BASE_DIR / '.env')
 
@@ -37,16 +34,12 @@ load_dotenv(BASE_DIR / '.env')
 # Log the value of SECRET_KEY
 # logging.debug(f"SECRET_KEY: {SECRET_KEY}")
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", None)
 # python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", None) == "True"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", None).split(",")
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -104,8 +97,6 @@ WSGI_APPLICATION = 'Cosmetic_studio.wsgi.application'
 # ASGI_APPLICATION = 'Cosmetic_studio.asgi.application'
 
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 if DEBUG:
     DATABASES = {
@@ -126,21 +117,6 @@ else:
         }
     }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.environ.get("DB_NAME", None),
-#         "USER": os.environ.get("DB_USER", None),
-#         "PASSWORD": os.environ.get("DB_PASSWORD", None),
-#         "HOST": os.environ.get("DB_HOST", None),
-#         "PORT": os.environ.get("DB_PORT", 5432),
-#     }
-# }
-#
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -159,9 +135,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # if DEBUG:
 #     AUTH_PASSWORD_VALIDATORS = ()
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -169,9 +142,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
@@ -186,8 +156,6 @@ STATIC_ROOT = BASE_DIR / "static_files/"
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media_images/"
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
