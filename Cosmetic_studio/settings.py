@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+
+from azure.storage.blob._blob_service_client import BlobServiceClient
 from dotenv import load_dotenv
 import logging.config
 
@@ -146,6 +148,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
 AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME") # Azure storage account name
 AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")  # Azure access key
+AZURE_STORAGE_CONNECTION_STRING = os.environ.get('AZURE_STORAGE_CONNECTION_STRING')
+blob_service_client = BlobServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
 AZURE_MEDIA_CONTAINER = os.environ.get("AZURE_MEDIA_CONTAINER", "media")  # Azure container name for media files
 AZURE_STATIC_CONTAINER = os.environ.get("AZURE_STATIC_CONTAINER", "static")  # Azure container name for static files
 # Generate a custom domain for Azure Blob Storage
