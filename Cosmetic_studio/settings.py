@@ -64,7 +64,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -143,19 +142,28 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
-STATICFILES_DIRS = (
-    BASE_DIR / "staticfiles",
-)
+AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME"),  # Azure storage account name
+AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")  # Azure access key
+AZURE_MEDIA_CONTAINER = os.environ.get("AZURE_MEDIA_CONTAINER", "media")  # Azure container name for media files
+AZURE_STATIC_CONTAINER = os.environ.get("AZURE_STATIC_CONTAINER", "static")  # Azure container name for static files
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Generate a custom domain for Azure Blob Storage
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 
-STATIC_ROOT = BASE_DIR / "static_files/"
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
 
-MEDIA_URL = "/media/"
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
 
-MEDIA_ROOT = BASE_DIR / "media_images/"
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (BASE_DIR / "staticfiles",)
+    STATIC_ROOT = BASE_DIR / "static_files/"
+
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = BASE_DIR / "media_images/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -168,7 +176,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy("index")
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", None)
 EMAIL_HOST = os.environ.get("EMAIL_HOST", None)
 EMAIL_PORT = os.environ.get("EMAIL_PORT", None)
-EMAIL_USE_TLS = os.environ.get("EMAIL_PORT", None) == 'True'
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", None) == 'True'
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", None)
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", None)
