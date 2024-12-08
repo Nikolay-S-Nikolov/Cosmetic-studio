@@ -22,17 +22,18 @@ from django.urls import path, include
 from Cosmetic_studio.common.views import health_check
 
 urlpatterns = [
-                  path('admin/', admin.site.urls),
-                  path('', include("Cosmetic_studio.common.urls")),
-                  path('accounts/', include('Cosmetic_studio.accounts.urls')),
-                  path('services/', include('Cosmetic_studio.services.urls')),
-                  path('shop/', include('Cosmetic_studio.product.urls')),
-                  path('orders/', include('Cosmetic_studio.orders.urls')),
-                  path('blog/', include('Cosmetic_studio.blog.urls')),
-                  path('contact/', include('Cosmetic_studio.contact.urls')),
-                  path('health/', health_check, name='health_check'),
+    path('admin/', admin.site.urls),
+    path('', include("Cosmetic_studio.common.urls")),
+    path('accounts/', include('Cosmetic_studio.accounts.urls')),
+    path('services/', include('Cosmetic_studio.services.urls')),
+    path('shop/', include('Cosmetic_studio.product.urls')),
+    path('orders/', include('Cosmetic_studio.orders.urls')),
+    path('blog/', include('Cosmetic_studio.blog.urls')),
+    path('contact/', include('Cosmetic_studio.contact.urls')),
+    path('health/', health_check, name='health_check'),
 
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
