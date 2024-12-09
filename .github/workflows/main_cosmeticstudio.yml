@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
-          name: python-app
+          name: django-app
           path: |
             release.zip
             !venv/
@@ -56,7 +56,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: python-app
+          name: django-app
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
@@ -73,9 +73,6 @@ jobs:
         env:
           AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
           AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
-        run: |
-          az storage container create --account-name $AZURE_ACCOUNT_NAME --account-key $AZURE_ACCOUNT_KEY --name static --public-access blob
-          az storage container create --account-name $AZURE_ACCOUNT_NAME --account-key $AZURE_ACCOUNT_KEY --name media --public-access blob
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
