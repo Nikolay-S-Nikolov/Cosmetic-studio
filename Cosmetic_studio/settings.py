@@ -185,7 +185,7 @@ if DEBUG:
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media_images/"
 else:
-    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+
     AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME", None)  # Azure storage account name
     AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY", None)  # Azure access key
     AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER", None)  # Azure container name for media files
