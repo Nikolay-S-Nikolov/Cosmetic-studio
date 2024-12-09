@@ -115,27 +115,27 @@ CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
 #     },
 # }
 # else:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": os.environ.get("DB_NAME", None),
-#             "USER": os.environ.get("DB_USER", None),
-#             "PASSWORD": os.environ.get("DB_PASSWORD", None),
-#             "HOST": os.environ.get("DB_HOST", None),
-#             "PORT": os.environ.get("DB_PORT", 5432),
-#         }
-#     }
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("MY_DB_NAME", None),
-        "USER": os.environ.get("MY_DB_USER", None),
-        "PASSWORD": os.environ.get("MY_DB_PASSWORD", None),
-        "HOST": os.environ.get("MY_DB_HOST", None),
-        "PORT": os.environ.get("MY_DB_PORT", 5432),
+        "NAME": os.environ.get("DB_NAME", None),
+        "USER": os.environ.get("DB_USER", None),
+        "PASSWORD": os.environ.get("DB_PASSWORD", None),
+        "HOST": os.environ.get("DB_HOST", None),
+        "PORT": os.environ.get("DB_PORT", 5432),
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get("MY_DB_NAME", None),
+#         "USER": os.environ.get("MY_DB_USER", None),
+#         "PASSWORD": os.environ.get("MY_DB_PASSWORD", None),
+#         "HOST": os.environ.get("MY_DB_HOST", None),
+#         "PORT": os.environ.get("MY_DB_PORT", 5432),
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -261,21 +261,21 @@ MY_EMAIL = os.environ.get("MY_EMAIL", None)
 #     },
 # }
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': 'error.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'ERROR',
+#             'class': 'logging.FileHandler',
+#             'filename': 'error.log',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     },
+# }
