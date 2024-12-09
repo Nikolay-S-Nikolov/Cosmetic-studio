@@ -11,13 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
-
-from azure.storage.blob._blob_service_client import BlobServiceClient
+from dotenv import load_dotenv
 import logging.config
 
 from django.urls import reverse_lazy
-from dotenv.main import load_dotenv
 
+# Quick-start development settings - unsuitable for production, see https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 # import logging
 
 # Set up logging
@@ -26,6 +25,8 @@ from dotenv.main import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 # Load environment variables from .env file
 load_dotenv(BASE_DIR / '.env')
 
@@ -36,11 +37,16 @@ load_dotenv(BASE_DIR / '.env')
 # Log the value of SECRET_KEY
 # logging.debug(f"SECRET_KEY: {SECRET_KEY}")
 
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", None)
 # python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
-DEBUG = os.environ.get("DEBUG", False) == "True"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", '').split(",")
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get("DEBUG", None) == "True"
+
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", None).split(",")
+
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -65,6 +71,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,6 +104,8 @@ WSGI_APPLICATION = 'Cosmetic_studio.wsgi.application'
 # ASGI_APPLICATION = 'Cosmetic_studio.asgi.application'
 
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
+# Database
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 if DEBUG:
     DATABASES = {
@@ -117,6 +126,9 @@ else:
         }
     }
 
+# Password validation
+# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -135,6 +147,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # if DEBUG:
 #     AUTH_PASSWORD_VALIDATORS = ()
 
+# Internationalization
+# https://docs.djangoproject.com/en/5.1/topics/i18n/
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -143,45 +158,33 @@ USE_I18N = True
 
 USE_TZ = True
 
-AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")  # Azure storage account name
-AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")  # Azure access key
-AZURE_STORAGE_CONNECTION_STRING = os.environ.get('AZURE_STORAGE_CONNECTION_STRING')
-AZURE_MEDIA_CONTAINER = os.environ.get("AZURE_MEDIA_CONTAINER", "media")  # Azure container name for media files
-AZURE_STATIC_CONTAINER = os.environ.get("AZURE_STATIC_CONTAINER", "static")  # Azure container name for static files
-# Generate a custom domain for Azure Blob Storage
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.azure_storage.AzureStorage",
-        "OPTIONS": {
-            "account_name": AZURE_ACCOUNT_NAME,
-            "account_key": AZURE_ACCOUNT_KEY,
-            "connection_string": AZURE_STORAGE_CONNECTION_STRING,
-            "container_name": AZURE_MEDIA_CONTAINER,
-        },
-    },
-    "staticfiles": {
-        "BACKEND": "storages.backends.azure_storage.AzureStorage",
-        "OPTIONS": {
-            "account_name": AZURE_ACCOUNT_NAME,
-            "account_key": AZURE_ACCOUNT_KEY,
-            "connection_string": AZURE_STORAGE_CONNECTION_STRING,
-            "container_name": AZURE_STATIC_CONTAINER,
-        },
-    },
-}
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    BASE_DIR / "staticfiles",
+)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = BASE_DIR / "static_files/"
 
 if DEBUG:
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = (BASE_DIR / "staticfiles",)
-    STATIC_ROOT = BASE_DIR / "static_files/"
-
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media_images/"
 else:
-    MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
-    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
+    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+    AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME", None)  # Azure storage account name
+    AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY", None)  # Azure access key
+    AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER", None)  # Azure container name for media files
+    # Generate a custom domain for Azure Blob Storage
+    AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
+    MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/"
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -194,16 +197,12 @@ LOGOUT_REDIRECT_URL = reverse_lazy("index")
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", None)
 EMAIL_HOST = os.environ.get("EMAIL_HOST", None)
 EMAIL_PORT = os.environ.get("EMAIL_PORT", None)
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", None) == 'True'
+EMAIL_USE_TLS = os.environ.get("EMAIL_PORT", None) == 'True'
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", None)
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", None)
 MY_EMAIL = os.environ.get("MY_EMAIL", None)
 
-# SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", None) == 'True'
-# if SECURE_SSL_REDIRECT:
-#     SESSION_COOKIE_SECURE = SECURE_SSL_REDIRECT
-#     CSRF_COOKIE_SECURE = SECURE_SSL_REDIRECT
 
 # LOGGING = {
 #     'version': 1,
