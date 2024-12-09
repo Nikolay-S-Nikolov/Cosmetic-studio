@@ -108,12 +108,12 @@ CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     },
+# }
 # else:
 #     DATABASES = {
 #         "default": {
@@ -126,16 +126,16 @@ DATABASES = {
 #         }
 #     }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.environ.get("MY_DB_NAME", None),
-#         "USER": os.environ.get("MY_DB_USER", None),
-#         "PASSWORD": os.environ.get("MY_DB_PASSWORD", None),
-#         "HOST": os.environ.get("MY_DB_HOST", None),
-#         "PORT": os.environ.get("MY_DB_PORT", 5432),
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("MY_DB_NAME", None),
+        "USER": os.environ.get("MY_DB_USER", None),
+        "PASSWORD": os.environ.get("MY_DB_PASSWORD", None),
+        "HOST": os.environ.get("MY_DB_HOST", None),
+        "PORT": os.environ.get("MY_DB_PORT", 5432),
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
