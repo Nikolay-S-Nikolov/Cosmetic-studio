@@ -107,35 +107,35 @@ CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         },
-#     }
-# else:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": os.environ.get("DB_NAME", None),
-#             "USER": os.environ.get("DB_USER", None),
-#             "PASSWORD": os.environ.get("DB_PASSWORD", None),
-#             "HOST": os.environ.get("DB_HOST", None),
-#             "PORT": os.environ.get("DB_PORT", 5432),
-#         }
-#     }
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("MY_DB_NAME", None),
-        "USER": os.environ.get("MY_DB_USER", None),
-        "PASSWORD": os.environ.get("MY_DB_PASSWORD", None),
-        "HOST": os.environ.get("MY_DB_HOST", None),
-        "PORT": os.environ.get("MY_DB_PORT", 5432),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        },
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("DB_NAME", None),
+            "USER": os.environ.get("DB_USER", None),
+            "PASSWORD": os.environ.get("DB_PASSWORD", None),
+            "HOST": os.environ.get("DB_HOST", None),
+            "PORT": os.environ.get("DB_PORT", 5432),
+        }
+    }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get("MY_DB_NAME", None),
+#         "USER": os.environ.get("MY_DB_USER", None),
+#         "PASSWORD": os.environ.get("MY_DB_PASSWORD", None),
+#         "HOST": os.environ.get("MY_DB_HOST", None),
+#         "PORT": os.environ.get("MY_DB_PORT", 5432),
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -185,23 +185,13 @@ if DEBUG:
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "media_images/"
 else:
-
+    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
     AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME", None)  # Azure storage account name
     AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY", None)  # Azure access key
     AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER", None)  # Azure container name for media files
     # Generate a custom domain for Azure Blob Storage
     AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
     MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/"
-
-    STORAGES = {
-        "default": {
-            "BACKEND": "storages.backends.azure_storage.AzureStorage",
-            "OPTIONS": {
-                "timeout": 20,
-                # "expiration_secs": 500,
-            },
-        },
-    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
