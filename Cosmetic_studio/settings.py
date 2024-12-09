@@ -109,15 +109,22 @@ CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME", None),
-        "USER": os.environ.get("DB_USER", None),
-        "PASSWORD": os.environ.get("DB_PASSWORD", None),
-        "HOST": os.environ.get("DB_HOST", None),
-        "PORT": os.environ.get("DB_PORT", 5432),
-    }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
 }
+# else:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": os.environ.get("DB_NAME", None),
+#             "USER": os.environ.get("DB_USER", None),
+#             "PASSWORD": os.environ.get("DB_PASSWORD", None),
+#             "HOST": os.environ.get("DB_HOST", None),
+#             "PORT": os.environ.get("DB_PORT", 5432),
+#         }
+#     }
 
 # DATABASES = {
 #     "default": {
@@ -182,6 +189,7 @@ AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER", None)  # Azure container nam
 # Generate a custom domain for Azure Blob Storage
 # AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
 # MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/"
+
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.azure_storage.AzureStorage",
@@ -191,7 +199,7 @@ STORAGES = {
         },
     },
     "staticfiles": {
-        "BACKEND": 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        "BACKEND": 'django.contrib.staticfiles.storage.StaticFilesStorage',
     }
 }
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
