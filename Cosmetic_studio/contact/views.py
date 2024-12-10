@@ -23,7 +23,8 @@ class ContactPageInfo(message_views.SuccessMessageMixin, views.FormView):
     def get_initial(self):
         initial = super().get_initial()
         if self.request.user.is_authenticated:
-            name = self.request.user.profile.get_profile_name() if not 'Anonymous' else ''
+            name = self.request.user.profile.get_profile_name() \
+                if not self.request.user.profile.get_profile_name() == 'Anonymous' else ''
             initial.update({
                 'name': name,
                 'email': self.request.user.email,
