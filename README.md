@@ -1,6 +1,10 @@
 <h1><a href="https://drive.google.com/file/d/16pw4jxpen3wh9tEsuMAfUxwoI4M2Na60/view?usp=sharing">This link is for easy set up and will be available for download from 11 Dec 2024 until 17 Dec 2024</a></h1>
 <h1>My email: niklay.s.nikolov@gmail Tel: +359 887 240987</h1>
 <h3> Try it here: https://studiocosmetic.azurewebsites.net </h3>
+<div>
+    <p>admin: media@studio.com pass: 1123qWER</p>
+    <p>staff: staff@studio.com pass: 1123qWER</p>
+</div>
 <h4><link rel="stylesheet" href="docs/project_setup.md">
 <a href="docs/project_setup.md"><i class="">Project Setup</i></a>
 </h4>
