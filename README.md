@@ -76,9 +76,10 @@ Cosmetic Studio aims to streamline operations in a cosmetic business by offering
 
 7. **Login and Profile Page**
    - A Login page with a register link.
-   - For registered users, providing full account management:
-     - View, edit, and delete orders.
-     - Track orders by status (pending, processing, completed, canceled).
+   - Profile Page for registered users, providing full account management:
+     - View and edit profile.
+     - Change password.
+     - Check Order History.
      - Delete profile option.
    ![Profile](images_for_readme/profile.png)
 
