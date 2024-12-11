@@ -4,6 +4,7 @@
 
 ## Try It Here
 [Cosmetic Studio Demo](https://studiocosmetic.azurewebsites.net)
+
 ## User Roles
 - **Superuser**: `media@studio.com` / `1123qWER`
 - **Staff Accounts**:
@@ -12,8 +13,13 @@
   - `nail_specialist@studio.com` / `1123qWER`
 - **Regular User**: `baba_mimi@gmail.com` / `1123qWER`
 
-## [Detailed Project Setup Instructions](docs/project_setup.md)
+## Deployment
+This project is deployed to production using **Microsoft Azure**:
+- **Azure Web App**: Hosts the application backend and frontend.
+- **Azure SQL Database**: Stores application data.
+- **Azure Blob Storage**: Manages media files.
 
+## [Detailed Project Setup Instructions](docs/project_setup.md)
 
 ## Introduction
 ![Logo](images_for_readme/intro.png)
