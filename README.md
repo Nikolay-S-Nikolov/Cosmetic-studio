@@ -2,11 +2,14 @@
 <h1>My email: niklay.s.nikolov@gmail Tel: +359 887 240987</h1>
 <h3> Try it here: https://studiocosmetic.azurewebsites.net </h3>
 <div>
-    <p>admin: media@studio.com pass: 1123qWER</p>
+    <p>superuser: media@studio.com pass: 1123qWER</p>
     <p>staff: staff@studio.com pass: 1123qWER</p>
+    <p>staff: blog_creator@studio.com pass: 1123qWER</p>
+    <p>staff: nail_specialist@studio.com pass: 1123qWER</p>
+    <p>regular user: baba_mimi@gmail.com pass: 1123qWER</p>
 </div>
 <h4><link rel="stylesheet" href="docs/project_setup.md">
-<a href="docs/project_setup.md"><i class="">Project Setup</i></a>
+<a href="docs/project_setup.md"><i class="text-uppercase"><strong>Detailed instructions for Project Setup</strong></i></a>
 </h4>
 <h1>
     <img src="images_for_readme/intro.png" width="5%" alt="Logo"/> Cosmetic Studio
