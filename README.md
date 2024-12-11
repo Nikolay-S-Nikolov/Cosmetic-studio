@@ -1,6 +1,6 @@
 # [Easy Setup Link (Available 11 Dec 2024 to 17 Dec 2024)](https://drive.google.com/drive/folders/17Geu2jOGJmN8ll45nLMxd6rXXSbc4KYj?usp=sharing)
 
-**Contact**: [Email me](mailto:niklay.s.nikolov@gmail) | Phone: +359 887 240987
+**Contact**: [Email me](mailto:nikolay.s.nikolov@gmail.com) | Phone: +359 887 240987
 
 ## Try It Here https://studiocosmetic.azurewebsites.net
 [Cosmetic Studio Demo](https://studiocosmetic.azurewebsites.net)
