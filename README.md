@@ -51,12 +51,11 @@
         <strong>Services Page</strong>
         <ul>
             <li>Lists all services offered by the studio.</li>
-            <li>Each service card includes:
+            <li>Each service card includes have a "Learn More" button that displays:
                 <ul>
-                    <li>A "Learn More" button that displays:</li>
-                    <li>Service price.</li>
                     <li>Duration.</li>
                     <li>Detailed explanation.</li>
+                    <li>Service price.</li>
                 </ul>
             </li>
         </ul>
@@ -69,15 +68,12 @@
         <strong>Online Shop</strong>
         <ul>
             <li>Displays all available products.</li>
-            <li>Each product card includes:
+            <li>Each product card have a "See Details" button leading to a page with:                  
                 <ul>
-                    <li>A "See Details" button leading to a page with:</li>                    
-                    <ul>
-                        <li>Product ingredients.</li>
-                        <li>Usage instructions.</li>
-                        <li>Price.</li>
-                        <li>Option to add the product to the cart.</li>
-                    </ul>
+                    <li>Product ingredients.</li>
+                    <li>Usage instructions.</li>
+                    <li>Price.</li>
+                    <li>Option to add the product to the cart.</li>
                 </ul>
             </li>
         </ul>
@@ -127,8 +123,9 @@
     </li>
 <hr>
     <li>
-        <strong>Profile Page</strong>
+        <strong>Login and Profile Page</strong>
         <ul>
+            <li>A Login page with register link</li>
             <li>For registered users, providing full account management:</li>
             <li>View, edit, and delete orders.</li>
             <li>Track orders by status (pending, processing, completed, canceled).</li>
@@ -146,7 +143,7 @@
             <li>Checkout functionality for placing orders.</li>
         </ul>
         <div>
-            <img src="images_for_readme/profile.png" alt="profile img"/>
+            <img src="images_for_readme/cart.png" alt="profile img"/>
         </div>
     </li>
 </ol>
