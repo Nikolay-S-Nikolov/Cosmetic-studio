@@ -2,7 +2,7 @@
 
 **Contact**: [Email me](mailto:niklay.s.nikolov@gmail) | Phone: +359 887 240987
 
-## Try It Here
+## Try It Here https://studiocosmetic.azurewebsites.net
 [Cosmetic Studio Demo](https://studiocosmetic.azurewebsites.net)
 
 ## User Roles
@@ -93,3 +93,5 @@ Cosmetic Studio aims to streamline operations in a cosmetic business by offering
    - Displays all selected products.
    - Checkout functionality for placing orders.
    ![Cart](images_for_readme/cart.png)
+
+## 
