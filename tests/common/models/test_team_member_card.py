@@ -1,3 +1,5 @@
+from time import sleep
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from Cosmetic_studio.common.models import TeamMemberCard
@@ -39,11 +41,17 @@ class TeamMemberCardModelTest(TestCase):
             appearance_order=2,
             created_by=self.user
         )
+        sleep(0.001)
         card3 = TeamMemberCard.objects.create(
             name='Member 3',
             appearance_order=1,
             created_by=self.user
         )
+        card4 = TeamMemberCard.objects.create(
+            name='Member 4',
+            appearance_order=2,
+            created_by=self.user
+        )
 
         cards = TeamMemberCard.objects.all()
-        self.assertEqual(list(card.name for card in cards), ['Member 3', 'Member 1', 'Member 2'])
+        self.assertEqual(list(card.name for card in cards), ['Member 3', 'Member 1', 'Member 4', 'Member 2'])
