@@ -6,7 +6,7 @@ To run this project, you will need:
 
 - Python 3.10+
 - Azure Blob Storage for serving the media files
-- PostgreSQL for the database.
+- PostgreSQL or SQLite for the database.
 
 ## Setup Guide
 
@@ -34,15 +34,45 @@ cp .env_template .env
    - `DEBUG`: Set to True for development, False for production.
    - `ALLOWED_HOSTS`: Add your allowed hosts, separated by commas.
 
+### Step 3: Create the Virtual Environment:
 
-### Step 3: Install Dependencies
+
+```sh
+python -m venv .venv
+```
+
+### Step 4: Activate the Virtual Environment:
+
+
+```sh
+.venv\Scripts\activate
+```
+
+### Step 5: If you are using PyCharm edit run/debug configurations to enable the .env file:
+   - Click on Run > Edit Configurations from the top menu.
+   - Select your configuration.
+   - Set Enable EnvFile.
+   - Fill the field 'Paths to ".env" files'.
+   - Apply your configuration
+   - 
+![Screenshot of a my Configurations.](images/config.png)
+
+### Step 6: Install Dependencies
 
 
 ```sh
 pip install -r requirements.txt
 ```
 
-### Step 4: Set Up the Database
+### Step 7: Activate loading files from .env
+
+
+
+```sh
+pip install -r requirements.txt
+```
+
+### Step 8: Set Up the Database
 
 Ensure `PostgreSQL` is running and set up your database using the credentials provided in the `.env `file.
 
@@ -52,7 +82,7 @@ python manage.py migrate
 ```
 
 
-### Step 5: Create a Superuser
+### Step 9: Create a Superuser
 To access the admin panel or Swagger documentation, create a superuser account:
 
 ```sh
@@ -61,7 +91,7 @@ To access the admin panel or Swagger documentation, create a superuser account:
 
 Follow the prompts to set up the superuser credentials.
 
-### Step 6: Run the Development Server
+### Step 10: Run the Development Server
 Run the server with the following command:
 
 ```sh
