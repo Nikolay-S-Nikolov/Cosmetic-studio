@@ -6,8 +6,23 @@ from Cosmetic_studio.product.models import Product
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'brand', 'description', 'image', 'price', 'units_sold', 'slug', 'user')
-    search_fields = ('name', 'brand', 'description', 'user__email', 'slug')
+    list_display = (
+        'name',
+        'brand',
+        'description',
+        'image',
+        'price',
+        'units_sold',
+        'slug',
+        'user'
+    )
+    search_fields = (
+        'name',
+        'brand',
+        'description',
+        'user__email',
+        'slug'
+    )
     list_filter = ('brand', 'user',)
     fieldsets = (
         ('Product', {

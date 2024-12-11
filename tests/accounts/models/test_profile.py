@@ -19,7 +19,9 @@ class ProfileModelTest(TestCase):
     def test__get_profile_name__returns_preferred_name(self):
         user = UserModel.objects.create(email='myName@gmail.com', password='123qWER', user_name="My Name")
         profile = Profile.objects.get(user=user)
+
         self.assertEqual(profile.get_profile_name(), 'Anonymous')
+
         profile.preferred_name_nickname = "Nickname Name"
         self.assertEqual(profile.get_profile_name(), 'Nickname Name')
 

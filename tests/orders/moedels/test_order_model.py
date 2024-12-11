@@ -22,7 +22,10 @@ class OrderModelTest(TestCase):
         self.assertEqual(order.status, 'Pending')
 
     def test__order_association_with_customer_and_deletion_on_customer_delete(self):
-        order = Order.objects.create(customer=self.user, total_price=100.00)
+        order = Order.objects.create(
+            customer=self.user,
+            total_price=100.00
+        )
 
         self.assertEqual(order.customer, self.user)
 
@@ -32,6 +35,10 @@ class OrderModelTest(TestCase):
             Order.objects.get(id=order.id)
 
     def test__str__returns_correct_format(self):
-        order = Order.objects.create(customer=self.user, status='Processing', total_price=100.00)
+        order = Order.objects.create(
+            customer=self.user,
+            status='Processing',
+            total_price=100.00
+        )
         expected = f"Order #{order.id} - Processing"
         self.assertEqual(str(order), expected)

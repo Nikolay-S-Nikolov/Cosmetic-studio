@@ -13,6 +13,7 @@ class TeamMemberCardModelTest(TestCase):
 
     def test__create_team_member_card__with_only_created_by(self):
         team_member_card = TeamMemberCard.objects.create(created_by=self.user)
+
         self.assertIsNotNone(team_member_card)
         self.assertEqual(team_member_card.created_by, self.user)
         self.assertIsNone(team_member_card.name)

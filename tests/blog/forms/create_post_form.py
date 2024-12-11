@@ -61,10 +61,12 @@ class CreatePostFormTest(TestCase):
         }
         form = CreatePostForm(data=form_data,
                               files={'main_image': mock_image, 'left_image': mock_image, 'right_image': mock_image})
+
         self.assertTrue(form.is_valid())
         post = form.save(commit=False)
         post.author = self.user
         post.save()
+
         self.assertEqual(post.slug, 'new-test-title-1')
 
 

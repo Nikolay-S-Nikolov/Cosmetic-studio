@@ -13,7 +13,11 @@ UserModel = get_user_model()
 class TestPostDetailView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        self.user = UserModel.objects.create_user(user_name='Mo', email='myname@gmail.com', password='123qWER')
+        self.user = UserModel.objects.create_user(
+            user_name='Mo',
+            email='myname@gmail.com',
+            password='123qWER'
+        )
         self.blog_post = BlogContent.objects.create(
             title='My Post',
             content='My content' * 10,
@@ -22,7 +26,10 @@ class TestPostDetailView(TestCase):
         )
 
     def test__post_comment__successful(self):
-        request = self.factory.post(reverse('post-details', kwargs={'slug': self.blog_post.slug}), {
+        request = self.factory.post(reverse(
+            'post-details',
+            kwargs={'slug': self.blog_post.slug}),
+            {
             'content': 'My first comment'
         })
         request.user = self.user

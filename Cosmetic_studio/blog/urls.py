@@ -9,7 +9,6 @@ urlpatterns = (
     path('<slug:slug>/', include([
         path('', PostListByTagView.as_view(), name='post-by-tag'),
         path('details/', PostDetailView.as_view(), name='post-details'),
-
     ])),
     path('edit-comment/<int:pk>/', EditCommentView.as_view(), name='edit-comment'),
     path('delete-comment/<int:pk>/', DeleteCommentView.as_view(), name='delete-comment'),

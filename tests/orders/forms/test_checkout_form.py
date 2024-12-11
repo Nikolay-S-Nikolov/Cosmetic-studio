@@ -81,7 +81,7 @@ class CheckoutFormTest(TestCase):
         self.assertTrue(form.is_valid())
 
         order = form.save(commit=True)
-        #
+
         self.assertIsNotNone(order.id)
         self.assertEqual(order.customer, self.user)
         self.assertEqual(order.total_price, 20)
