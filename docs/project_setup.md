@@ -55,7 +55,7 @@ python -m venv .venv
    - Fill the field 'Paths to ".env" files'.
    - Apply your configuration
    - 
-![Screenshot of a my Configurations.](images/config.png)
+![Screenshot of my Configurations.](images/config.png)
 
 ### Step 6: Install Dependencies
 
