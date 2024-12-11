@@ -12,7 +12,7 @@
 <a href="docs/project_setup.md"><i class="text-uppercase"><strong>Detailed instructions for Project Setup</strong></i></a>
 </h4>
 <h1>
-    <img src="images_for_readme/intro.png" width="5%" alt="Logo"/> Cosmetic Studio
+    <img src="images_for_readme/intro.png" width="8%" alt="Logo"/> Cosmetic Studio
 </h1>
 
 <p>

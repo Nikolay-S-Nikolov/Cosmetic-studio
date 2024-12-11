@@ -83,7 +83,7 @@ python manage.py migrate
 
 
 ### Step 9: Create a Superuser
-To access the admin panel or Swagger documentation, create a superuser account:
+To access the admin panel create a superuser account:
 
 ```sh
   python manage.py createsuperuser
