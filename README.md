@@ -16,7 +16,7 @@
 ## Deployment
 This project is deployed to production using **Microsoft Azure**:
 - **Azure Web App**: Hosts the application backend and frontend.
-- **Azure SQL Database**: Stores application data.
+- ****Azure Database for PostgreSQL****: Stores application data.
 - **Azure Blob Storage**: Manages media files.
 
 ## [Detailed Project Setup Instructions](docs/project_setup.md)
