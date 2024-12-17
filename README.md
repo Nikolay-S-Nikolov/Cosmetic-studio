@@ -1,24 +1,3 @@
-# [Easy Setup Link (Available 11 Dec 2024 to 17 Dec 2024)](https://drive.google.com/drive/folders/17Geu2jOGJmN8ll45nLMxd6rXXSbc4KYj?usp=sharing)
-
-**Contact**: [Email me](mailto:nikolay.s.nikolov@gmail.com) | Phone: +359 887 240987
-
-## Try It Here https://studiocosmetic.azurewebsites.net
-[Cosmetic Studio Demo](https://studiocosmetic.azurewebsites.net)
-
-## User Roles
-- **Superuser**: `media@studio.com` / `1123qWER`
-- **Staff Accounts**:
-  - `staff@studio.com` / `1123qWER`
-  - `blog_creator@studio.com` / `1123qWER`
-  - `nail_specialist@studio.com` / `1123qWER`
-- **Regular User**: `baba_mimi@gmail.com` / `1123qWER`
-
-## Deployment
-This project is deployed to production using **Microsoft Azure**:
-- **Azure Web App**: Hosts the application backend and frontend.
-- ****Azure Database for PostgreSQL****: Stores application data.
-- **Azure Blob Storage**: Manages media files.
-
 ## [Detailed Project Setup Instructions](docs/project_setup.md)
 
 ## Introduction
